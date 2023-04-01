@@ -7,6 +7,15 @@ class Button {
   private int width;
   private int height;
   
+  private String text;
+  
+  private int fontSize;
+  private boolean autoFontSize;
+  private int textRed;
+  private int textGreen;
+  private int textBlue;
+  private String font;
+  
   private int red;
   private int green;
   private int blue;
@@ -18,6 +27,8 @@ class Button {
   
   private boolean roundedCorners;
   
+  private float fontHeight;
+  
   private int hoverRedEffect;
   private int hoverGreenEffect;
   private int hoverBlueEffect;
@@ -25,11 +36,21 @@ class Button {
   private int activatedGreenEffect;
   private int activatedBlueEffect;
   
-  Button (int x, int y, int w, int h) {
+  Button (int x, int y, int w, int h, String text) {
     this.x = x;
     this.y = y;
     this.width = w;
     this.height = h;
+    this.text = text;
+    
+    this.autoFontSize = false;
+    this.fontSize = 30;
+    this.textRed = 150;
+    this.textGreen = 50;
+    this.textBlue = 150;
+    this.font = PFont.list()[0];
+    
+    this.fontHeight = textAscent() - textDescent();
     
     this.red = 100;
     this.green = 100;
@@ -50,7 +71,7 @@ class Button {
     this.activatedBlueEffect = 50;
   }
   
-  void display() {
+  void displayRect() {
     if (this.isMouseHovering()) {
       fill(red + hoverRedEffect, green + hoverGreenEffect, blue + hoverBlueEffect);
     } else {
@@ -69,6 +90,30 @@ class Button {
       }
     }
     rect(x, y, this.width, this.height);
+  }
+  
+  void updateFontHeight() {
+    this.fontHeight = textAscent() - textDescent();
+  }
+  
+  void setFontSize() {
+  }
+  
+  void displayText() {
+    if (this.autoFontSize) {
+      this.setFontSize();
+    }
+    
+    textFont(createFont(this.font, this.fontSize));
+    fill(textRed, textGreen, textBlue);
+    textAlign(CENTER);
+    updateFontHeight();
+    text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
+  }
+  
+  void display() {
+    this.displayRect();
+    this.displayText();
   }
   
   boolean isMouseHovering () {
