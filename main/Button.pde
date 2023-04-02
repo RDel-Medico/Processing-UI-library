@@ -64,7 +64,7 @@ class Button {
     this.borderBlue = 0;
 
     this.roundedCorners = true;
-    this.cornerRadius = 15;
+    this.cornerRadius = 200;
 
     this.hoverRedEffect = 50;
     this.hoverGreenEffect = 50;
@@ -130,13 +130,21 @@ class Button {
     this.displayRect();
     this.displayText();
   }
+  
+  private void updateCornerRadius() {
+    if (this.cornerRadius > height / 2) {
+      this.cornerRadius = height / 2;
+    }
+  }
 
   boolean isMouseHovering () {
     if (this.roundedCorners) {
-      if (mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y + this.cornerRadius && mouseY < this.y + this.height - this.cornerRadius ||
-        mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height - this.cornerRadius*2) {
+      if ((mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y + this.cornerRadius && mouseY < this.y + this.height - this.cornerRadius) ||
+        (mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height)) {
         return true;
       }
+      
+      this.updateCornerRadius();
       
       int distanceTopLeft = distanceTwoPoint(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
       int distanceTopRight = distanceTwoPoint(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
