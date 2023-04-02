@@ -124,7 +124,7 @@ class Button {
     text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
   }
 
-  void display() {
+  public void display() {
     this.displayRect();
     this.displayText();
   }
@@ -135,7 +135,7 @@ class Button {
     }
   }
 
-  boolean isMouseHovering () {
+  public boolean isMouseHovering () {
     if (this.roundedCorners) {
       if ((mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y + this.cornerRadius && mouseY < this.y + this.height - this.cornerRadius) ||
         (mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height)) {
@@ -158,113 +158,153 @@ class Button {
     }
   }
 
-  boolean isActivated() {
+  public boolean isActivated() {
     return mousePressed && this.isMouseHovering();
   }
 
-  void setColor(int red, int green, int blue) {
+  public void setColor(int red, int green, int blue) {
     this.red = red;
     this.green = green;
     this.blue = blue;
   }
 
-  void setColor(int black) {
+  public void setColor(int black) {
     this.red = black;
     this.green = black;
     this.blue = black;
   }
 
-  void setBorderWidth (int bW) {
+  public void setBorderWidth (int bW) {
     this.borderWidth = bW;
   }
 
-  void setBorderColor (int red, int green, int blue) {
+  public void setBorderColor (int red, int green, int blue) {
     this.borderRed = red;
     this.borderGreen = green;
     this.borderBlue = blue;
   }
 
-  void setBorderColor (int black) {
+  public void setBorderColor (int black) {
     this.borderRed = black;
     this.borderGreen = black;
     this.borderBlue = black;
   }
 
-  void setRoundedCorner (int radius) {
-    this.roundedCorner = true;
+  public void setRoundedCorner (int radius) {
+    this.roundedCorners = true;
     this.cornerRadius = radius;
   }
 
-  void setSquareCorner () {
-    this.roundedCorner = false;
+  public void setSquareCorner () {
+    this.roundedCorners = false;
   }
 
-  void setX (int x) {
+  public void setX (int x) {
     this.x = x;
   }
 
-  void setY (int y) {
+  public void setY (int y) {
     this.y = y;
   }
 
-  void setWidth (int w) {
+  public void setWidth (int w) {
     this.width = w;
   }
 
-  void setHeight (int h) {
+  public void setHeight (int h) {
     this.height = h;
   }
 
-  void setText(String text) {
+  public void setText(String text) {
     this.text = text;
   }
 
-  void setFontSize (int size) {
+  public void setFontSize (int size) {
     this.fontSize = size;
   }
 
-  void setHoverColorEffect (int red, int green, int blue) {
+  public void setHoverColorEffect (int red, int green, int blue) {
     this.hoverRedEffect = red;
     this.hoverGreenEffect = green;
     this.hoverBlueEffect = blue;
   }
 
-  void setHoverColorEffect (int black) {
+  public void setHoverColorEffect (int black) {
     this.hoverRedEffect = black;
     this.hoverBlueEffect = black;
     this.hoverGreenEffect = black;
   }
 
-  void setActivatedColorEffect (int red, int green, int blue) {
+  public void setActivatedColorEffect (int red, int green, int blue) {
     this.activatedRedEffect = red;
     this.activatedGreenEffect = green;
     this.activatedBlueEffect = blue;
   }
 
-  void setActivatedColorEffect (int black) {
+  public void setActivatedColorEffect (int black) {
     this.activatedRedEffect = black;
     this.activatedGreenEffect = black;
     this.activatedBlueEffect = black;
   }
 
-  void setTextColor (int red, int green, int blue) {
+  public void setTextColor (int red, int green, int blue) {
     this.textRed = red;
     this.textGreen = green;
     this.textBlue = blue;
   }
 
-  void setTextColor (int black) {
+  public void setTextColor (int black) {
     this.textRed = black;
     this.textGreen = black;
     this.textBlue = black;
   }
 
-  void setAutoFontSize (boolean auto) {
+  public void setAutoFontSize (boolean auto) {
     this.autoFontSize = auto;
   }
 
-  void setFont (String font) {
+  public void setFont (String font) {
     this.font = font;
+  }
+
+  public int getX () {
+    return this.x;
+  }
+
+  public int getY () {
+    return this.y;
+  }
+
+  public int getWidth() {
+    return this.width;
+  }
+
+  public int getHeight() {
+    return this.height;
+  }
+
+  public String getText() {
+    return this.text;
+  }
+
+  public String getFont() {
+    return this.font;
+  }
+
+  public int getFontSize() {
+    return this.fontSize;
+  }
+
+  public int getBorderWidth() {
+    return this.borderWidth;
+  }
+
+  public boolean getCornerRounded() {
+    return this.roundedCorners;
+  }
+
+  public int getCornerRadius() {
+    return this.cornerRadius;
   }
 }
 
