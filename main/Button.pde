@@ -15,6 +15,7 @@ class Button {
   private int textGreen;
   private int textBlue;
   private String font;
+  private boolean dirtyFont;
   
   private int red;
   private int green;
@@ -43,12 +44,13 @@ class Button {
     this.height = h;
     this.text = text;
     
-    this.autoFontSize = false;
+    this.autoFontSize = true;
     this.fontSize = 30;
-    this.textRed = 150;
-    this.textGreen = 50;
-    this.textBlue = 150;
+    this.textRed = 20;
+    this.textGreen = 200;
+    this.textBlue = 180;
     this.font = PFont.list()[0];
+    this.dirtyFont = true;
     
     this.fontHeight = textAscent() - textDescent();
     
@@ -81,11 +83,10 @@ class Button {
     if (this.borderWidth == 0) {
       noStroke();
     } else {
+      strokeWeight(this.borderWidth);
       if (this.isActivated()) {
-        strokeWeight(this.borderWidth);
         stroke(borderRed + activatedRedEffect, borderGreen + activatedGreenEffect, borderBlue + activatedBlueEffect);
       } else {
-        strokeWeight(this.borderWidth);
         stroke(borderRed, borderGreen, borderBlue);
       }
     }
@@ -97,17 +98,25 @@ class Button {
   }
   
   void setFontSize() {
+    float minWidth = 12/this.text.length() * this.width;
+    
+    float minHeight = 12/(textDescent() + textAscent()) * this.height;
+    
+    this.fontSize = (int)min(minWidth, minHeight);
   }
   
   void displayText() {
-    if (this.autoFontSize) {
+    if (this.autoFontSize && this.dirtyFont) {
       this.setFontSize();
+      this.dirtyFont = false;
+      textFont(createFont(this.font, this.fontSize));
+      updateFontHeight();
+    } else {
+      textFont(createFont(this.font, this.fontSize));
     }
     
-    textFont(createFont(this.font, this.fontSize));
     fill(textRed, textGreen, textBlue);
     textAlign(CENTER);
-    updateFontHeight();
     text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
   }
   
