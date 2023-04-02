@@ -1,61 +1,65 @@
+
+
 class Cursor {
 
-  int x;
-  int y;
+  private int x;
+  private int y;
 
-  int minValue;
-  int maxValue;
-  int value;
-  float valuePercent;
+  private int minValue;
+  private int maxValue;
+  private int value;
+  private float valuePercent;
 
-  int width;
-  int height;
+  private int width;
+  private int height;
 
-  boolean centered;
+  private boolean centered;
 
-  int barColorRed;
-  int barColorGreen;
-  int barColorBlue;
-  int barStrokeWidth;
-  int barStrokeColorRed;
-  int barStrokeColorGreen;
-  int barStrokeColorBlue;
+  private int barColorRed;
+  private int barColorGreen;
+  private int barColorBlue;
+  private int barStrokeWidth;
+  private int barStrokeColorRed;
+  private int barStrokeColorGreen;
+  private int barStrokeColorBlue;
 
-  int selectorColorRed;
-  int selectorColorGreen;
-  int selectorColorBlue;
-  int selectorStrokeWidth;
-  int selectorStrokeColorRed;
-  int selectorStrokeColorGreen;
-  int selectorStrokeColorBlue;
+  private int selectorColorRed;
+  private int selectorColorGreen;
+  private int selectorColorBlue;
+  private int selectorStrokeWidth;
+  private int selectorStrokeColorRed;
+  private int selectorStrokeColorGreen;
+  private int selectorStrokeColorBlue;
 
-  int selectorX;
-  int selectorY;
-  int selectorRadius;
+  private int selectorX;
+  private int selectorY;
+  private int selectorRadius;
 
-  int valueFontSize;
-  int valueFontColorRed;
-  int valueFontColorGreen;
-  int valueFontColorBlue;
-  int valueStrokeColorRed;
-  int valueStrokeColorGreen;
-  int valueStrokeColorBlue;
-  int valueStrokeWidth;
-  int valueBackgroundColorRed;
-  int valueBackgroundColorGreen;
-  int valueBackgroundColorBlue;
-  boolean fontDirty;
-
-
-  String title;
-  int titleFontSize;
-  int titleColorRed;
-  int titleColorGreen;
-  int titleColorBlue;
-  boolean titleTop;
+  private int valueFontSize;
+  private int valueFontColorRed;
+  private int valueFontColorGreen;
+  private int valueFontColorBlue;
+  private int valueStrokeColorRed;
+  private int valueStrokeColorGreen;
+  private int valueStrokeColorBlue;
+  private int valueStrokeWidth;
+  private int valueBackgroundColorRed;
+  private int valueBackgroundColorGreen;
+  private int valueBackgroundColorBlue;
+  private boolean fontDirty;
+  private boolean showValue;
 
 
-  boolean selectorDragged;
+  private String title;
+  private int titleFontSize;
+  private int titleColorRed;
+  private int titleColorGreen;
+  private int titleColorBlue;
+  private boolean titleTop;
+  private boolean showTitle;
+
+
+  private boolean selectorDragged;
 
 
   Cursor (int x, int y, int w, int h, int minValue, int maxValue, String title) {
@@ -94,6 +98,7 @@ class Cursor {
     this.valueBackgroundColorGreen = 227;
     this.valueBackgroundColorBlue = 227;
     this.fontDirty = true;
+    this.showValue = true;
 
     this.title = title;
     this.titleFontSize = 30;
@@ -101,30 +106,30 @@ class Cursor {
     this.titleColorGreen = 0;
     this.titleColorBlue = 0;
     this.titleTop = false;
+    this.showTitle = true;
 
     this.selectorDragged = false;
 
     this.selectorRadius = this.height + 10;
 
-    this.centered = true;
+    this.centered = false;
 
     this.selectorX = (int)(this.x + this.valuePercent * this.width - this.width / 2);
     this.selectorY = this.y;
   }
 
-  void displaySelector() {
+  private void displaySelector() {
     fill(this.selectorColorRed, this.selectorColorGreen, this.selectorColorBlue);
     stroke(this.selectorStrokeColorRed, this.selectorStrokeColorGreen, this.selectorStrokeColorBlue);
     strokeWeight(this.selectorStrokeWidth);
     circle(this.selectorX, this.selectorY, this.selectorRadius);
   }
 
-  void displayTitle() {
+  private void displayTitle() {
 
     fill(titleColorRed, titleColorGreen, titleColorBlue);
     textSize(titleFontSize);
     textAlign(CENTER);
-
 
     if (this.titleTop) {
 
@@ -142,7 +147,7 @@ class Cursor {
     }
   }
 
-  void displayBar() {
+  private void displayBar() {
     fill(this.barColorRed, this.barColorGreen, this.barColorBlue);
     stroke(this.barStrokeColorRed, this.barStrokeColorGreen, this.barStrokeColorBlue);
     strokeWeight(this.barStrokeWidth);
@@ -154,11 +159,11 @@ class Cursor {
     }
   }
 
-  void updateValue () {
+  private void updateValue () {
     this.value = (int)(this.minValue + this.maxValue * this.valuePercent);
   }
 
-  void setValueFontSize() {
+  private void setValueFontSize() {
     float minWidth = 12/(str(this.value).length()) * 80;
 
 
@@ -167,7 +172,7 @@ class Cursor {
     this.valueFontSize = (int)min(minWidth, minHeight) - 2;
   }
 
-  void displayValue () {
+  private void displayValue () {
     fill(this.valueBackgroundColorRed, this.valueBackgroundColorGreen, this.valueBackgroundColorBlue);
     stroke(this.valueStrokeColorRed, this.valueStrokeColorGreen, this.valueStrokeColorBlue);
     strokeWeight(this.valueStrokeWidth);
@@ -196,7 +201,7 @@ class Cursor {
     }
   }
 
-  void updateSelector() {
+  private void updateSelector() {
     if (this.centered) {
       this.selectorX = (int)(this.x + this.width * this.valuePercent - this.width / 2);
       this.selectorY = this.y;
@@ -234,23 +239,188 @@ class Cursor {
     }
   }
 
-  void display() {
+  public void display() {
     this.updateSelector();
     this.displayBar();
     this.displaySelector();
-    this.displayValue();
-    this.displayTitle();
+    if (this.showValue) {
+      this.displayValue();
+    }
+
+    if (this.showTitle) {
+      this.displayTitle();
+    }
   }
 
-  boolean isMouseHoveringSelector () {
+  public boolean isMouseHoveringSelector () {
     return  distanceTwoPoints(mouseX, mouseY, this.selectorX, this.selectorY) <= this.selectorRadius / 2;
   }
 
-  boolean isSelectorActivated () {
+  public boolean isSelectorActivated () {
     if (mousePressed && this.isMouseHoveringSelector()) {
       this.selectorDragged = true;
       return true;
     }
     return false;
+  }
+
+  public void setX (int x) {
+    this.x = x;
+  }
+
+  public void setY (int y) {
+    this.y = y;
+  }
+
+  public void setMinValue (int minValue) {
+    this.minValue = minValue;
+  }
+
+  public void setMaxValue (int maxValue) {
+    this.maxValue = maxValue;
+  }
+
+  public void setWidth (int w) {
+    this.width = w;
+  }
+
+  public void setHeight (int h) {
+    this.height = h;
+  }
+
+  public void setCentered (boolean centered) {
+    this.centered = centered;
+  }
+
+  public void setBarColor (int red, int green, int blue) {
+    this.barColorRed = red;
+    this.barColorGreen = green;
+    this.barColorBlue = blue;
+  }
+
+  public void setBarColor (int black) {
+    this.barColorRed = black;
+    this.barColorGreen = black;
+    this.barColorBlue = black;
+  }
+
+  public void setBarStrokeColor (int red, int green, int blue) {
+    this.barStrokeColorRed = red;
+    this.barStrokeColorGreen = green;
+    this.barStrokeColorBlue = blue;
+  }
+
+  public void setBarStrokeColor (int black) {
+    this.barStrokeColorRed = black;
+    this.barStrokeColorGreen = black;
+    this.barStrokeColorBlue = black;
+  }
+
+  public void setBarStrokeWidth (int w) {
+    this.barStrokeWidth = w;
+  }
+
+  public void setSelectorColor (int red, int green, int blue) {
+    this.selectorColorRed = red;
+    this.selectorColorGreen = green;
+    this.selectorColorBlue = blue;
+  }
+
+  public void setSelectorColor (int black) {
+    this.selectorColorRed = black;
+    this.selectorColorGreen = black;
+    this.selectorColorBlue = black;
+  }
+
+  public void setSelectorStrokeColor (int red, int green, int blue) {
+    this.selectorStrokeColorRed = red;
+    this.selectorStrokeColorGreen = green;
+    this.selectorStrokeColorBlue = blue;
+  }
+
+  public void setSelectorStrokeColor (int black) {
+    this.selectorStrokeColorRed = black;
+    this.selectorStrokeColorGreen = black;
+    this.selectorStrokeColorBlue = black;
+  }
+
+  public void setSelectorStrokeWidth (int w) {
+    this.selectorStrokeWidth = w;
+  }
+
+  public void setSelectorRadius (int radius) {
+    this.selectorRadius = radius;
+  }
+
+  public void setValueFontSize (int size) {
+    this.valueFontSize = size;
+  }
+
+  public void setValueFontColor (int red, int green, int blue) {
+    this.valueFontColorRed = red;
+    this.valueFontColorGreen = green;
+    this.valueFontColorBlue = blue;
+  }
+
+  public void setValueFontColor (int black) {
+    this.valueFontColorRed = black;
+    this.valueFontColorGreen = black;
+    this.valueFontColorBlue = black;
+  }
+
+  public void setValueStrokeColor (int red, int green, int blue) {
+    this.valueStrokeColorRed = red;
+    this.valueStrokeColorGreen = green;
+    this.valueStrokeColorBlue = blue;
+  }
+
+  public void setValueStrokeColor (int black) {
+    this.valueStrokeColorRed = black;
+    this.valueStrokeColorGreen = black;
+    this.valueStrokeColorBlue = black;
+  }
+
+  public void setValueBackgroundColor (int red, int green, int  blue) {
+    this.valueBackgroundColorRed = red;
+    this.valueBackgroundColorGreen = green;
+    this.valueBackgroundColorBlue = blue;
+  }
+
+  public void setValueBackgroundColor (int black) {
+    this.valueBackgroundColorRed = black;
+    this.valueBackgroundColorGreen = black;
+    this.valueBackgroundColorBlue = black;
+  }
+
+  public void setValueStrokeWidth (int w) {
+    this.valueStrokeWidth = w;
+  }
+
+  public void setTitle (String title) {
+    this.title = title;
+  }
+
+  public void setColorTitle (int red, int green, int blue) {
+    this.titleColorRed = red;
+    this.titleColorGreen = green;
+    this.titleColorBlue = blue;
+  }
+
+  public void setColorTitle (int black) {
+    this.titleColorRed = black;
+    this.titleColorGreen = black;
+    this.titleColorBlue = black;
+  }
+
+  public void setTitleFontSize (int size) {
+    this.titleFontSize = size;
+  }
+
+  public void setShowValue (boolean show) {
+    this.showValue = show;
+  }
+
+  public void setShowTitle (boolean show) {
+    this.showTitle = show;
   }
 }
