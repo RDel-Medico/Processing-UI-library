@@ -1,5 +1,3 @@
-
-
 class Button {
   private int x;
   private int y;
@@ -75,7 +73,7 @@ class Button {
     this.activatedBlueEffect = 50;
   }
 
-  void displayRect() {
+  private void displayRect() {
     if (this.isMouseHovering()) {
       fill(red + hoverRedEffect, green + hoverGreenEffect, blue + hoverBlueEffect);
     } else {
@@ -99,19 +97,19 @@ class Button {
     }
   }
 
-  void updateFontHeight() {
+  private void updateFontHeight() {
     this.fontHeight = textAscent() - textDescent();
   }
 
-  void setFontSize() {
+  private void setFontSize() {
     float minWidth = 12/this.text.length() * this.width;
 
     float minHeight = 12/(textDescent() + textAscent()) * this.height;
 
-    this.fontSize = (int)min(minWidth, minHeight);
+    this.fontSize = (int)min(minWidth, minHeight) - 2;
   }
 
-  void displayText() {
+  private void displayText() {
     if (this.autoFontSize && this.dirtyFont) {
       this.setFontSize();
       this.dirtyFont = false;
@@ -130,7 +128,7 @@ class Button {
     this.displayRect();
     this.displayText();
   }
-  
+
   private void updateCornerRadius() {
     if (this.cornerRadius > height / 2) {
       this.cornerRadius = height / 2;
@@ -143,14 +141,14 @@ class Button {
         (mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height)) {
         return true;
       }
-      
+
       this.updateCornerRadius();
-      
+
       int distanceTopLeft = distanceTwoPoint(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
       int distanceTopRight = distanceTwoPoint(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
       int distanceBottomLeft = distanceTwoPoint(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.height - this.cornerRadius);
       int distanceBottomRight = distanceTwoPoint(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.height - this.cornerRadius);
-      
+
       if (distanceTopLeft < this.cornerRadius || distanceTopRight < this.cornerRadius || distanceBottomLeft < this.cornerRadius || distanceBottomRight < this.cornerRadius) {
         return true;
       }
@@ -162,6 +160,111 @@ class Button {
 
   boolean isActivated() {
     return mousePressed && this.isMouseHovering();
+  }
+
+  void setColor(int red, int green, int blue) {
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
+  }
+
+  void setColor(int black) {
+    this.red = black;
+    this.green = black;
+    this.blue = black;
+  }
+
+  void setBorderWidth (int bW) {
+    this.borderWidth = bW;
+  }
+
+  void setBorderColor (int red, int green, int blue) {
+    this.borderRed = red;
+    this.borderGreen = green;
+    this.borderBlue = blue;
+  }
+
+  void setBorderColor (int black) {
+    this.borderRed = black;
+    this.borderGreen = black;
+    this.borderBlue = black;
+  }
+
+  void setRoundedCorner (int radius) {
+    this.roundedCorner = true;
+    this.cornerRadius = radius;
+  }
+
+  void setSquareCorner () {
+    this.roundedCorner = false;
+  }
+
+  void setX (int x) {
+    this.x = x;
+  }
+
+  void setY (int y) {
+    this.y = y;
+  }
+
+  void setWidth (int w) {
+    this.width = w;
+  }
+
+  void setHeight (int h) {
+    this.height = h;
+  }
+
+  void setText(String text) {
+    this.text = text;
+  }
+
+  void setFontSize (int size) {
+    this.fontSize = size;
+  }
+
+  void setHoverColorEffect (int red, int green, int blue) {
+    this.hoverRedEffect = red;
+    this.hoverGreenEffect = green;
+    this.hoverBlueEffect = blue;
+  }
+
+  void setHoverColorEffect (int black) {
+    this.hoverRedEffect = black;
+    this.hoverBlueEffect = black;
+    this.hoverGreenEffect = black;
+  }
+
+  void setActivatedColorEffect (int red, int green, int blue) {
+    this.activatedRedEffect = red;
+    this.activatedGreenEffect = green;
+    this.activatedBlueEffect = blue;
+  }
+
+  void setActivatedColorEffect (int black) {
+    this.activatedRedEffect = black;
+    this.activatedGreenEffect = black;
+    this.activatedBlueEffect = black;
+  }
+
+  void setTextColor (int red, int green, int blue) {
+    this.textRed = red;
+    this.textGreen = green;
+    this.textBlue = blue;
+  }
+
+  void setTextColor (int black) {
+    this.textRed = black;
+    this.textGreen = black;
+    this.textBlue = black;
+  }
+
+  void setAutoFontSize (boolean auto) {
+    this.autoFontSize = auto;
+  }
+
+  void setFont (String font) {
+    this.font = font;
   }
 }
 
