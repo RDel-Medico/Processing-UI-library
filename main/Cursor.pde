@@ -29,7 +29,11 @@ class Cursor {
   int selectorStrokeColorGreen;
   int selectorStrokeColorBlue;
   
+  int selectorX;
+  int selectorY;
   int selectorRadius;
+  
+  boolean selectorDragged;
 
 
   Cursor (int x, int y, int w, int h, int minValue, int maxValue) {
@@ -56,20 +60,21 @@ class Cursor {
     this.selectorStrokeColorBlue = 255;
     this.selectorStrokeWidth = 3;
     
+    this.selectorDragged = false;
+    
     this.selectorRadius = this.height + 10;
 
-    this.centered = false;
+    this.centered = true;
+    
+    this.selectorX = (int)(this.x + this.valuePercent * this.width - this.width / 2);
+    this.selectorY = this.y;
   }
 
   void displaySelector() {
     fill(this.selectorColorRed, this.selectorColorGreen, this.selectorColorBlue);
     stroke(this.selectorStrokeColorRed, this.selectorStrokeColorGreen, this.selectorStrokeColorBlue);
     strokeWeight(this.selectorStrokeWidth);
-    if (this.centered) {
-      circle(this.x + this.valuePercent * this.width - this.width / 2, y, this.selectorRadius);
-    } else {
-      circle(this.x + this.valuePercent * this.width, y + height/2, this.selectorRadius);
-    }
+    circle(this.selectorX, this.selectorY, this.selectorRadius);
   }
 
   void displayBar() {
@@ -83,9 +88,62 @@ class Cursor {
       rect(this.x, this.y, this.width, this.height);
     }
   }
+  
+  void updateSelector() {
+    if (this.centered) {
+      this.selectorX = (int)(this.x + this.width * this.valuePercent - this.width / 2);
+      this.selectorY = this.y;
+    } else {
+      this.selectorX = (int)(this.x + this.width * this.valuePercent);
+      this.selectorY = this.y + this.height / 2;
+    }
+    
+    this.isSelectorActivated();
+    
+    if (!mousePressed) {
+      this.selectorDragged = false;
+    }
+    
+    if (this.selectorDragged) {
+      if (this.centered) {
+        if (mouseX < this.x - this.width / 2) {
+          this.valuePercent = 0;
+        } else if (mouseX > this.x + this.width / 2) {
+          this.valuePercent = 1;
+        } else {
+          this.valuePercent = ((100 * (mouseX - (this.x - this.width / 2))) / this.width);
+          this.valuePercent = this.valuePercent / 100;
+        }
+      } else {
+        if (mouseX < this.x) {
+          this.valuePercent = 0;
+        } else if (mouseX > this.x + this.width) {
+          this.valuePercent = 1;
+        } else {
+          this.valuePercent = ((100 * (mouseX - this.x)) / this.width);
+          this.valuePercent = this.valuePercent / 100;
+      }
+      }
+      
+      
+    }
+  }
 
   void display() {
+    this.updateSelector();
     this.displayBar();
     this.displaySelector();
+  }
+  
+  boolean isMouseHoveringSelector () {
+    return  distanceTwoPoints(mouseX, mouseY, this.selectorX, this.selectorY) <= this.selectorRadius / 2;
+  }
+  
+  boolean isSelectorActivated () {
+    if (mousePressed && this.isMouseHoveringSelector()) {
+      this.selectorDragged = true;
+      return true;
+    }
+    return false;
   }
 }

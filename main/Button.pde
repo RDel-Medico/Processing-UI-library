@@ -160,10 +160,10 @@ class Button {
 
       this.updateCornerRadius();
 
-      int distanceTopLeft = distanceTwoPoint(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
-      int distanceTopRight = distanceTwoPoint(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
-      int distanceBottomLeft = distanceTwoPoint(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.height - this.cornerRadius);
-      int distanceBottomRight = distanceTwoPoint(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.height - this.cornerRadius);
+      int distanceTopLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
+      int distanceTopRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
+      int distanceBottomLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.height - this.cornerRadius);
+      int distanceBottomRight = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.height - this.cornerRadius);
 
       if (distanceTopLeft < this.cornerRadius || distanceTopRight < this.cornerRadius || distanceBottomLeft < this.cornerRadius || distanceBottomRight < this.cornerRadius) {
         return true;
@@ -325,6 +325,6 @@ class Button {
 }
 
 
-int distanceTwoPoint(int x1, int y1, int x2, int y2) {
+int distanceTwoPoints(int x1, int y1, int x2, int y2) {
   return (int)sqrt(pow(max(x1, x2) - min(x1, x2), 2) + pow(max(y1, y2) - min(y1, y2), 2));
 }
