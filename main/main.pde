@@ -9,6 +9,4 @@ void setup () {
 void draw () {
   background(220);
   c.display();
-  
-  println(c.selectorDragged);
 }
