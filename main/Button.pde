@@ -5,6 +5,8 @@ class Button {
   private int width;
   private int height;
 
+  private boolean centered;
+
   private String text;
 
   private int fontSize;
@@ -42,6 +44,7 @@ class Button {
     this.width = w;
     this.height = h;
     this.text = text;
+    this.centered = true;
 
     this.autoFontSize = true;
     this.fontSize = 30;
@@ -90,10 +93,18 @@ class Button {
         stroke(borderRed, borderGreen, borderBlue);
       }
     }
-    if (this.roundedCorners) {
-      rect(x, y, this.width, this.height, this.cornerRadius, this.cornerRadius, this.cornerRadius, this.cornerRadius);
+    if (this.centered) {
+      if (this.roundedCorners) {
+        rect(x-this.width/2, y-this.height/2, this.width, this.height, this.cornerRadius, this.cornerRadius, this.cornerRadius, this.cornerRadius);
+      } else {
+        rect(x-this.width/2, y-this.height/2, this.width, this.height);
+      }
     } else {
-      rect(x, y, this.width, this.height);
+      if (this.roundedCorners) {
+        rect(x, y, this.width, this.height, this.cornerRadius, this.cornerRadius, this.cornerRadius, this.cornerRadius);
+      } else {
+        rect(x, y, this.width, this.height);
+      }
     }
   }
 
@@ -121,7 +132,12 @@ class Button {
 
     fill(textRed, textGreen, textBlue);
     textAlign(CENTER);
-    text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
+    
+    if (this.centered) {
+      text(this.text, this.x, this.y + this.fontHeight / 2);
+    } else {
+      text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
+    }
   }
 
   public void display() {

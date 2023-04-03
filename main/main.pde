@@ -2,7 +2,7 @@ Button b;
 
 void setup () {
   size(600, 600);
-  b = new Button (200, 200, 100, 50, "working");
+  b = new Button (50, 50, 100, 50, "working");
 }
 
 
