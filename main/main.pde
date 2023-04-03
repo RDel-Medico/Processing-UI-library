@@ -2,7 +2,7 @@ Cursor c;
 
 void setup () {
   size(600, 600);
-  c = new Cursor (200, 200, 200, 20, 0, 1000);
+  c = new Cursor (200, 200, 200, 20, 0, 1000, "Bananes");
 }
 
 

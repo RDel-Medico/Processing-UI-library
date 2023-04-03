@@ -47,10 +47,18 @@ class Cursor {
   boolean fontDirty;
 
 
+  String title;
+  int titleFontSize;
+  int titleColorRed;
+  int titleColorGreen;
+  int titleColorBlue;
+  boolean titleTop;
+
+
   boolean selectorDragged;
 
 
-  Cursor (int x, int y, int w, int h, int minValue, int maxValue) {
+  Cursor (int x, int y, int w, int h, int minValue, int maxValue, String title) {
     this.x = x;
     this.y = y;
     this.width = w;
@@ -87,6 +95,13 @@ class Cursor {
     this.valueBackgroundColorBlue = 227;
     this.fontDirty = true;
 
+    this.title = title;
+    this.titleFontSize = 30;
+    this.titleColorRed = 0;
+    this.titleColorGreen = 0;
+    this.titleColorBlue = 0;
+    this.titleTop = false;
+
     this.selectorDragged = false;
 
     this.selectorRadius = this.height + 10;
@@ -102,6 +117,29 @@ class Cursor {
     stroke(this.selectorStrokeColorRed, this.selectorStrokeColorGreen, this.selectorStrokeColorBlue);
     strokeWeight(this.selectorStrokeWidth);
     circle(this.selectorX, this.selectorY, this.selectorRadius);
+  }
+
+  void displayTitle() {
+
+    fill(titleColorRed, titleColorGreen, titleColorBlue);
+    textSize(titleFontSize);
+    textAlign(CENTER);
+
+
+    if (this.titleTop) {
+
+      if (this.centered) {
+        text(this.title, this.x, this.y - this.height / 2 - 30);
+      } else {
+        text(this.title, this.x + this.width / 2, this.y - 30);
+      }
+    } else {
+      if (this.centered) {
+        text(this.title, this.x - this.width / 2 - textWidth(this.title) + 20, this.y + 10);
+      } else {
+        text(this.title, this.x - textWidth(this.title) + 20, this.y + this.height / 2 + 10);
+      }
+    }
   }
 
   void displayBar() {
@@ -122,10 +160,10 @@ class Cursor {
 
   void setValueFontSize() {
     float minWidth = 12/(str(this.value).length()) * 80;
-    
+
 
     float minHeight = 12/(textDescent() + textAscent()) * (this.height + 20);
-println(minHeight);
+    println(minHeight);
     this.valueFontSize = (int)min(minWidth, minHeight) - 2;
   }
 
@@ -148,13 +186,13 @@ println(minHeight);
       this.setValueFontSize();
       this.fontDirty = false;
     }
-    
+
     textSize(this.valueFontSize);
 
     if (this.centered) {
       text(this.value, this.x + this.width / 2 + 60, this.y + 10);
     } else {
-      text(this.value, this.x + this.width / 2 + 60, this.y + this.height / 2 + 10);
+      text(this.value, this.x + this.width + 60, this.y + this.height / 2 + 10);
     }
   }
 
@@ -201,6 +239,7 @@ println(minHeight);
     this.displayBar();
     this.displaySelector();
     this.displayValue();
+    this.displayTitle();
   }
 
   boolean isMouseHoveringSelector () {
