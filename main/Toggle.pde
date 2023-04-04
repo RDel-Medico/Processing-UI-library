@@ -68,6 +68,7 @@ class ToggleSlider extends Toggle {
   int animationDurationInFrame;
   boolean animation;
   float avancementInAnimation;
+  boolean animated;
 
   int textSize;
 
@@ -102,6 +103,8 @@ class ToggleSlider extends Toggle {
     this.animation = false;
     this.animationCurrentFrame = 0;
     this.avancementInAnimation = 0;
+    
+    this.animated = false;
 
     this.textSize = 20;
   }
@@ -204,8 +207,11 @@ class ToggleSlider extends Toggle {
 
   void updateValue() {
     if (!this.animation) {
-      if (this.isActivated() && !this.valueChanged) {
+      if (this.isActivated() && !this.valueChanged && this.animated) {
         this.animation = true;
+      } else if (this.isActivated() && !this.valueChanged && !this.animated) {
+        this.value = !this.value;
+        this.valueChanged = true;
       } else if (this.valueChanged && !this.isActivated()) {
         this.valueChanged = false;
       }
