@@ -1,12 +1,10 @@
-Cursor c;
+Toggle t;
 
 void setup () {
   size(600, 600);
-  c = new Cursor (200, 200, 200, 20, 0, 1000, "Bananes");
 }
 
 
 void draw () {
   background(220);
-  c.display();
 }
