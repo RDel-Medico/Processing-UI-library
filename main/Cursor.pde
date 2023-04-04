@@ -421,4 +421,84 @@ class Cursor {
   public void setShowTitle (boolean show) {
     this.showTitle = show;
   }
+
+  public int getX () {
+    return this.x;
+  }
+
+  public int getY () {
+    return this.y;
+  }
+
+  public int getMinValue () {
+    return this.minValue;
+  }
+
+  public int getMaxValue () {
+    return this.maxValue;
+  }
+
+  public int getValue () {
+    return this.value;
+  }
+
+  public float getValuePercent () {
+    return this.valuePercent;
+  }
+
+  public boolean isCentered () {
+    return this.centered;
+  }
+
+  public int getWidth() {
+    return this.width;
+  }
+
+  public int getHeight() {
+    return this.height;
+  }
+
+  int getSelectorRadius() {
+    return this.selectorRadius;
+  }
+
+  int getValueFontSize() {
+    return this.valueFontSize;
+  }
+
+  int getBarStrokeWidth () {
+    return this.barStrokeWidth;
+  }
+
+  int getSelectorBarStrokeWidth () {
+    return this.selectorStrokeWidth;
+  }
+
+  int getValueStrokeWidth () {
+    return this.valueStrokeWidth;
+  }
+
+  String getTitle () {
+    return this.title;
+  }
+
+  int getTitleFontSize () {
+    return this.titleFontSize;
+  }
+
+  boolean isValueDisplayed () {
+    return this.showValue;
+  }
+
+  boolean isTitleDisplayed () {
+    return this.showTitle;
+  }
+
+  boolean isTitleOnTop () {
+    return this.titleTop;
+  }
+
+  boolean isTitleOnLeft () {
+    return !this.titleTop;
+  }
 }
