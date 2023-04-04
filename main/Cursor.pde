@@ -158,7 +158,7 @@ class Cursor {
   }
 
   private void updateValue () {
-    this.value = (int)(this.minValue + this.maxValue * this.valuePercent);
+    this.value = (int)(this.minValue + (this.maxValue - this.minValue) * this.valuePercent);
   }
 
   private void setValueFontSize() {

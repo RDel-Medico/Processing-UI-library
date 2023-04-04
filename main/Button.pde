@@ -153,24 +153,47 @@ class Button {
 
   public boolean isMouseHovering () {
     if (this.roundedCorners) {
-      if ((mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y + this.cornerRadius && mouseY < this.y + this.height - this.cornerRadius) ||
-        (mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height)) {
-        return true;
+      if (this.centered) {
+        if ((mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 && mouseY > this.y + this.cornerRadius - this.height / 2 && mouseY < this.y + this.height / 2 - this.cornerRadius) ||
+          (mouseX > this.x + this.cornerRadius - this.width / 2 && mouseX < this.x + this.width / 2 - this.cornerRadius && mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2)) {
+          return true;
+        }
+      } else {
+        if ((mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y + this.cornerRadius && mouseY < this.y + this.height - this.cornerRadius) ||
+          (mouseX > this.x + this.cornerRadius && mouseX < this.x + this.width - this.cornerRadius && mouseY > this.y && mouseY < this.y + this.height)) {
+          return true;
+        }
       }
 
       this.updateCornerRadius();
 
-      int distanceTopLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
-      int distanceTopRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
-      int distanceBottomLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.height - this.cornerRadius);
-      int distanceBottomRight = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.height - this.cornerRadius);
+      int distanceTopLeft;
+      int distanceTopRight;
+      int distanceBottomLeft;
+      int distanceBottomRight;
+
+      if (this.centered) {
+        distanceTopLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius - this.width / 2, this.y + this.cornerRadius - this.height / 2);
+        distanceTopRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width / 2 - this.cornerRadius, this.y + this.cornerRadius - this.height / 2);
+        distanceBottomLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius - this.width / 2, this.y + this.height / 2 - this.cornerRadius);
+        distanceBottomRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width / 2 - this.cornerRadius, this.y + this.height / 2 - this.cornerRadius);
+      } else {
+        distanceTopLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.cornerRadius);
+        distanceTopRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.cornerRadius);
+        distanceBottomLeft = distanceTwoPoints(mouseX, mouseY, this.x + this.cornerRadius, this.y + this.height - this.cornerRadius);
+        distanceBottomRight = distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.cornerRadius, this.y + this.height - this.cornerRadius);
+      }
 
       if (distanceTopLeft < this.cornerRadius || distanceTopRight < this.cornerRadius || distanceBottomLeft < this.cornerRadius || distanceBottomRight < this.cornerRadius) {
         return true;
       }
       return false;
     } else {
-      return mouseX < this.x + this.width && mouseX > this.x && mouseY < this.y + this.height && mouseY > this.y;
+      if (this.centered) {
+        return mouseX < this.x + this.width / 2 && mouseX > this.x - this.width / 2 && mouseY < this.y + this.height / 2 && mouseY > this.y - this.height / 2;
+      } else {
+        return mouseX < this.x + this.width && mouseX > this.x && mouseY < this.y + this.height && mouseY > this.y;
+      }
     }
   }
 
