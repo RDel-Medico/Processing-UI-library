@@ -1,5 +1,3 @@
-
-
 class Cursor {
 
   private int x;
