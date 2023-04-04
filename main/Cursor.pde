@@ -166,7 +166,6 @@ class Cursor {
 
 
     float minHeight = 12/(textDescent() + textAscent()) * (this.height + 20);
-    println(minHeight);
     this.valueFontSize = (int)min(minWidth, minHeight) - 2;
   }
 
@@ -182,7 +181,7 @@ class Cursor {
     }
 
     fill(this.valueFontColorRed, this.valueFontColorGreen, this.valueFontColorBlue);
-    textAlign(CENTER);
+    textAlign(CENTER, CENTER);
 
     this.updateValue();
     if (this.fontDirty) {
@@ -193,9 +192,9 @@ class Cursor {
     textSize(this.valueFontSize);
 
     if (this.centered) {
-      text(this.value, this.x + this.width / 2 + 60, this.y + 10);
+      text(this.value, this.x + this.width / 2 + 60, this.y);
     } else {
-      text(this.value, this.x + this.width + 60, this.y + this.height / 2 + 10);
+      text(this.value, this.x + this.width + 60, this.y + this.height / 2);
     }
   }
 

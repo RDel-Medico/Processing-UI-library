@@ -131,12 +131,12 @@ class Button {
     }
 
     fill(textRed, textGreen, textBlue);
-    textAlign(CENTER);
+    textAlign(CENTER, CENTER);
     
     if (this.centered) {
-      text(this.text, this.x, this.y + this.fontHeight / 2);
+      text(this.text, this.x, this.y);
     } else {
-      text(this.text, this.x +this.width / 2, this.y + this.height / 2 + this.fontHeight / 2);
+      text(this.text, this.x +this.width / 2, this.y + this.height / 2);
     }
   }
 
