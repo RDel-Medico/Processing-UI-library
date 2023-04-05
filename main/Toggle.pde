@@ -40,6 +40,62 @@ public abstract class Toggle {
 
   abstract boolean isMouseHovering();
   abstract boolean isActivated();
+
+  int getX () {
+    return this.x;
+  }
+
+  int getY () {
+    return this.y;
+  }
+
+  boolean getValue () {
+    return this.value;
+  }
+
+  boolean isTextDisplayed () {
+    return this.displayText;
+  }
+
+  String getTextOn () {
+    return this.textOn;
+  }
+
+  String getTextOff () {
+    return this.textOff;
+  }
+
+  void setX (int x) {
+    this.x = x;
+  }
+
+  void setY (int y) {
+    this.y = y;
+  }
+
+  void setDisplayText (boolean displayText) {
+    this.displayText = displayText;
+  }
+
+  void setTextColor (int red, int green, int blue) {
+    this.textColorRed = red;
+    this.textColorGreen = green;
+    this.textColorBlue = blue;
+  }
+
+  void setTextColor (int black) {
+    this.textColorRed = black;
+    this.textColorGreen = black;
+    this.textColorBlue = black;
+  }
+
+  void setTextOn (String t) {
+    this.textOn = t;
+  }
+
+  void setTextOff (String t) {
+    this.textOff = t;
+  }
 }
 
 class ToggleSlider extends Toggle {
@@ -103,7 +159,7 @@ class ToggleSlider extends Toggle {
     this.animation = false;
     this.animationCurrentFrame = 0;
     this.avancementInAnimation = 0;
-    
+
     this.animated = false;
 
     this.textSize = 20;
@@ -168,11 +224,11 @@ class ToggleSlider extends Toggle {
       this.animation = false;
       this.animationCurrentFrame = 0;
     } else {
-      
+
       textAlign(CENTER, CENTER);
       textSize(this.textSize);
       fill(this.textColorRed, this.textColorGreen, this.textColorBlue);
-      
+
       if (this.centered) {
         text(this.textOn, this.x - this.width / 4, this. y);
         text(this.textOff, this.x + this.width / 4, this. y);
@@ -198,7 +254,7 @@ class ToggleSlider extends Toggle {
           circle(this.x + this.width / 4 + ((this.width / 2) * this.avancementInAnimation), this.y + this.height / 2, min(this.height, this.width) - 5);
         }
       }
-      
+
       this.animationCurrentFrame++;
       this.avancementInAnimation = ((this.animationCurrentFrame * 100) / this.animationDurationInFrame );
       this.avancementInAnimation = this.avancementInAnimation / 100;
@@ -227,7 +283,6 @@ class ToggleSlider extends Toggle {
       displayIndicator();
       displayText();
     }
-    
   }
 
   boolean isMouseHovering() {
@@ -249,6 +304,50 @@ class ToggleSlider extends Toggle {
 
   boolean isActivated() {
     return mousePressed && this.isMouseHovering();
+  }
+
+  int getWidth () {
+    return this.width;
+  }
+
+  int getHeight () {
+    return this.height;
+  }
+
+  int getBackgroundStrokeWidth () {
+    return this.backgroundStrokeWidth;
+  }
+
+  int getIndicatorStrokeWidth () {
+    return this.indicatorStrokeWidth;
+  }
+
+  float getAnimationDuration () {
+    return this.animationDuration;
+  }
+
+  int getAnimationCurrentFrame () {
+    return this.animationCurrentFrame;
+  }
+
+  int getAnimationDurationInFrame () {
+    return this.animationDurationInFrame;
+  }
+
+  boolean isAnimated () {
+    return this.animated;
+  }
+
+  boolean isAnimationCurrentlyActive () {
+    return this.animation;
+  }
+
+  boolean isToggleCentered () {
+    return this.centered;
+  }
+
+  int getTextSize () {
+    return this.textSize;
   }
 }
 
@@ -339,5 +438,13 @@ class ToggleButton extends Toggle {
       displayText();
     }
     displayButton();
+  }
+
+  int getRadius () {
+    return this.radius;
+  }
+
+  int getTextSize () {
+    return this.textSize;
   }
 }
