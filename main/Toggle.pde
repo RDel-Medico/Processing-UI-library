@@ -35,8 +35,7 @@ public abstract class Toggle {
     this.valueChanged = false;
   }
 
-  void display () {
-  }
+  abstract void display ();
 
   abstract boolean isMouseHovering();
   abstract boolean isActivated();
