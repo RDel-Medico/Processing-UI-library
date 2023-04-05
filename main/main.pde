@@ -14,7 +14,8 @@ void setup () {
   c = new Cursor(250, 150, 200, 15, 50, 2000, "EXAMPLE");
   t1 = new ToggleButton(250, 250, 50);
   t2 = new ToggleSlider(250, 350, 60, 30);
-  cb1 = new CheckBox(250, 450, new String[] {"aa", "vb", "TTTTTTTTTT"}, 10, 10);
+  cb1 = new CheckBox(150, 450, new String[] {"aa", "vb", "TTTTTTTTTT"}, 10, 10);
+  cb2 = new RadioButton(350, 450, new String[] {"aa", "vb", "bb"}, 20);
 }
 
 
@@ -26,4 +27,5 @@ void draw () {
   t1.display();
   t2.display();
   cb1.display();
+  cb2.display();
 }
