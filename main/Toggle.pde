@@ -98,6 +98,7 @@ public abstract class Toggle {
   }
 }
 
+
 class ToggleSlider extends Toggle {
 
   int width;
@@ -117,7 +118,7 @@ class ToggleSlider extends Toggle {
   int indicatorStrokeColorRed;
   int indicatorStrokeColorGreen;
   int indicatorStrokeColorBlue;
-  int indicatorStrokeWidth;
+  int indicatorStrokeWidth;////////////////
 
   float animationDuration;
   int animationCurrentFrame;
@@ -160,7 +161,7 @@ class ToggleSlider extends Toggle {
     this.animationCurrentFrame = 0;
     this.avancementInAnimation = 0;
 
-    this.animated = false;
+    this.animated = true;
 
     this.textSize = 20;
   }
@@ -349,7 +350,81 @@ class ToggleSlider extends Toggle {
   int getTextSize () {
     return this.textSize;
   }
+
+  void setWidth (int w) {
+    this.width = w;
+  }
+
+  void setHeight (int h) {
+    this.height = h;
+  }
+
+  void setBackgroundColor (int red, int green, int blue) {
+    this.backgroundColorRed = red;
+    this.backgroundColorGreen = green;
+    this.backgroundColorBlue = blue;
+  }
+
+  void setBackgroundColor (int black) {
+    this.backgroundColorRed = black;
+    this.backgroundColorGreen = black;
+    this.backgroundColorBlue = black;
+  }
+
+  void setBackgroundStrokeColor (int red, int green, int blue) {
+    this.backgroundStrokeColorRed = red;
+    this.backgroundStrokeColorGreen = green;
+    this.backgroundStrokeColorBlue = blue;
+  }
+
+  void setBackgroundStrokeColor (int black) {
+    this.backgroundStrokeColorRed = black;
+    this.backgroundStrokeColorGreen = black;
+    this.backgroundStrokeColorBlue = black;
+  }
+
+  void setIndicatorColor (int red, int green, int blue) {
+    this.indicatorColorRed = red;
+    this.indicatorColorGreen = green;
+    this.indicatorColorBlue = blue;
+  }
+
+  void setIndicatorColor (int black) {
+    this.indicatorColorRed = black;
+    this.indicatorColorGreen = black;
+    this.indicatorColorBlue = black;
+  }
+
+  void setIndicatorStrokeColor (int red, int green, int blue) {
+    this.indicatorStrokeColorRed = red;
+    this.indicatorStrokeColorGreen = green;
+    this.indicatorStrokeColorBlue = blue;
+  }
+
+  void setIndicatorStrokeColor (int black) {
+    this.indicatorStrokeColorRed = black;
+    this.indicatorStrokeColorGreen = black;
+    this.indicatorStrokeColorBlue = black;
+  }
+
+  void setAnimationDuration (float duration) {
+    this.animationDuration = duration;
+    this.animationDurationInFrame = (int)(duration * 60);
+  }
+
+  void setAnimated (boolean animated) {
+    this.animated = animated;
+  }
+
+  void setCentered (boolean centered) {
+    this.centered = centered;
+  }
+
+  void setTextSize (int textSize) {
+    this.textSize = textSize;
+  }
 }
+
 
 class ToggleButton extends Toggle {
 
@@ -446,5 +521,25 @@ class ToggleButton extends Toggle {
 
   int getTextSize () {
     return this.textSize;
+  }
+
+  void setRadius (int r) {
+    this.radius = r;
+  }
+
+  void setButtonColor (int red, int green, int blue) {
+    this.buttonColorRed = red;
+    this.buttonColorGreen = green;
+    this.buttonColorBlue = blue;
+  }
+
+  void setButtonColor (int black) {
+    this.buttonColorRed = black;
+    this.buttonColorGreen = black;
+    this.buttonColorBlue = black;
+  }
+
+  void setTextSize (int textSize) {
+    this.textSize = textSize;
   }
 }
