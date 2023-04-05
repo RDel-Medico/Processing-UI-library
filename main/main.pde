@@ -6,12 +6,12 @@ Toggle t2;
 
 void setup () {
   size(600, 600);
-  b1 = new Button(150, 50, 200, 30, "EXAMPLE");
+  b1 = new Button(250, 50, 200, 30, "EXAMPLE");
   b1.setSquareCorner();
-  b2 = new Button(150, 100, 200, 30, "EXAMPLE");
-  c = new Cursor(150, 150, 200, 15, 50, 2000, "EXAMPLE");
-  t1 = new ToggleButton(150, 250, 50);
-  t2 = new ToggleSlider(150, 350, 60, 30);
+  b2 = new Button(250, 100, 200, 30, "EXAMPLE");
+  c = new Cursor(250, 150, 200, 15, 50, 2000, "EXAMPLE");
+  t1 = new ToggleButton(250, 250, 50);
+  t2 = new ToggleSlider(250, 350, 60, 30);
 }
 
 
