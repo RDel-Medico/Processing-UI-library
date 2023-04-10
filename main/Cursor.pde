@@ -457,47 +457,47 @@ class Cursor {
     return this.height;
   }
 
-  int getSelectorRadius() {
+  public int getSelectorRadius() {
     return this.selectorRadius;
   }
 
-  int getValueFontSize() {
+  public int getValueFontSize() {
     return this.valueFontSize;
   }
 
-  int getBarStrokeWidth () {
+  public int getBarStrokeWidth () {
     return this.barStrokeWidth;
   }
 
-  int getSelectorBarStrokeWidth () {
+  public int getSelectorBarStrokeWidth () {
     return this.selectorStrokeWidth;
   }
 
-  int getValueStrokeWidth () {
+  public int getValueStrokeWidth () {
     return this.valueStrokeWidth;
   }
 
-  String getTitle () {
+  public String getTitle () {
     return this.title;
   }
 
-  int getTitleFontSize () {
+  public int getTitleFontSize () {
     return this.titleFontSize;
   }
 
-  boolean isValueDisplayed () {
+  public boolean isValueDisplayed () {
     return this.showValue;
   }
 
-  boolean isTitleDisplayed () {
+  public boolean isTitleDisplayed () {
     return this.showTitle;
   }
 
-  boolean isTitleOnTop () {
+  public boolean isTitleOnTop () {
     return this.titleTop;
   }
 
-  boolean isTitleOnLeft () {
+  public boolean isTitleOnLeft () {
     return !this.titleTop;
   }
 }

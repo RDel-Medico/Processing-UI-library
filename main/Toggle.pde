@@ -1,20 +1,15 @@
 public abstract class Toggle {
-  int x;
-  int y;
+  private int x;
+  private int y;
 
-  boolean value;
+  private boolean value;
 
-  boolean displayText;
+  private boolean displayText;
 
+  private String textOn;
+  private String textOff;
 
-  int textColorRed;
-  int textColorGreen;
-  int textColorBlue;
-
-  String textOn;
-  String textOff;
-
-  boolean valueChanged;
+  private boolean valueChanged;
 
   Toggle (int posX, int posY) {
     this.x = posX;
@@ -24,111 +19,110 @@ public abstract class Toggle {
 
     this.displayText = true;
 
-
-    this.textColorRed = 0;
-    this.textColorGreen = 0;
-    this.textColorBlue = 0;
-
     this.textOn = "ON";
     this.textOff = "OFF";
 
     this.valueChanged = false;
   }
 
-  abstract void display ();
+  public abstract void display ();
 
-  abstract boolean isMouseHovering();
-  abstract boolean isActivated();
+  public abstract boolean isMouseHovering();
+  public abstract boolean isActivated();
 
-  int getX () {
+  public int getX () {
     return this.x;
   }
 
-  int getY () {
+  public int getY () {
     return this.y;
   }
 
-  boolean getValue () {
+  public boolean getValue () {
     return this.value;
   }
+  
+  public boolean getValueChanged () {
+    return this.valueChanged; 
+  }
 
-  boolean isTextDisplayed () {
+  public boolean isTextDisplayed () {
     return this.displayText;
   }
 
-  String getTextOn () {
+  public String getTextOn () {
     return this.textOn;
   }
 
-  String getTextOff () {
+  public String getTextOff () {
     return this.textOff;
   }
 
-  void setX (int x) {
+  public void setX (int x) {
     this.x = x;
   }
 
-  void setY (int y) {
+  public void setY (int y) {
     this.y = y;
   }
 
-  void setDisplayText (boolean displayText) {
+  public void setDisplayText (boolean displayText) {
     this.displayText = displayText;
   }
 
-  void setTextColor (int red, int green, int blue) {
-    this.textColorRed = red;
-    this.textColorGreen = green;
-    this.textColorBlue = blue;
-  }
-
-  void setTextColor (int black) {
-    this.textColorRed = black;
-    this.textColorGreen = black;
-    this.textColorBlue = black;
-  }
-
-  void setTextOn (String t) {
+  public void setTextOn (String t) {
     this.textOn = t;
   }
 
-  void setTextOff (String t) {
+  public void setTextOff (String t) {
     this.textOff = t;
+  }
+  
+  public void setValue (boolean value) {
+    this.value = value; 
+  }
+  
+  public void setValueChanged (boolean v) {
+    this.valueChanged = v;
   }
 }
 
 
 class ToggleSlider extends Toggle {
 
-  int width;
-  int height;
+  private int width;
+  private int height;
 
-  int backgroundColorRed;
-  int backgroundColorGreen;
-  int backgroundColorBlue;
-  int backgroundStrokeColorRed;
-  int backgroundStrokeColorGreen;
-  int backgroundStrokeColorBlue;
-  int backgroundStrokeWidth;
+  private int backgroundColorRed;
+  private int backgroundColorGreen;
+  private int backgroundColorBlue;
+  private int backgroundStrokeColorRed;
+  private int backgroundStrokeColorGreen;
+  private int backgroundStrokeColorBlue;
+  private int backgroundStrokeWidth;
 
-  int indicatorColorRed;
-  int indicatorColorGreen;
-  int indicatorColorBlue;
-  int indicatorStrokeColorRed;
-  int indicatorStrokeColorGreen;
-  int indicatorStrokeColorBlue;
-  int indicatorStrokeWidth;////////////////
+  private int indicatorColorRed;
+  private int indicatorColorGreen;
+  private int indicatorColorBlue;
+  private int indicatorStrokeColorRed;
+  private int indicatorStrokeColorGreen;
+  private int indicatorStrokeColorBlue;
+  private int indicatorStrokeWidth;
+  
+  private int textColorRed;
+  private int textColorGreen;
+  private int textColorBlue;
 
-  float animationDuration;
-  int animationCurrentFrame;
-  int animationDurationInFrame;
-  boolean animation;
-  float avancementInAnimation;
-  boolean animated;
+  private float animationDuration;
+  private int animationCurrentFrame;
+  private int animationDurationInFrame;
+  private boolean animation;
+  private float avancementInAnimation;
+  private boolean animated;
 
-  int textSize;
+  private int textSize;
 
-  boolean centered;
+  private boolean centered;
 
   ToggleSlider (int posX, int posY, int w, int h) {
     super(posX, posY);
@@ -152,7 +146,10 @@ class ToggleSlider extends Toggle {
     this.indicatorStrokeColorGreen = 210;
     this.indicatorStrokeColorBlue = 210;
     this.indicatorStrokeWidth = 2;
-
+    
+    this.textColorRed = 0;
+    this.textColorGreen = 0;
+    this.textColorBlue = 0;
 
     this.animationDuration = 0.5;
     this.animationDurationInFrame = (int)(this.animationDuration * 60);
@@ -165,62 +162,62 @@ class ToggleSlider extends Toggle {
     this.textSize = 20;
   }
 
-  void displayBar() {
+  private void displayBar() {
     stroke(this.backgroundStrokeColorRed, this.backgroundStrokeColorGreen, this.backgroundStrokeColorBlue);
     strokeWeight(this.backgroundStrokeWidth);
     fill(this.backgroundColorRed, this.backgroundColorGreen, this.backgroundColorBlue);
 
     if (this.centered) {
-      rect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height, this.height / 2, this.height / 2, this.height / 2, this.height / 2);
+      rect(this.getX() - this.width / 2, this.getY() - this.height / 2, this.width, this.height, this.height / 2, this.height / 2, this.height / 2, this.height / 2);
     } else {
-      rect(this.x, this.y, this.width, this.height, this.height / 2, this.height / 2, this.height / 2, this.height / 2);
+      rect(this.getX(), this.getY(), this.width, this.height, this.height / 2, this.height / 2, this.height / 2, this.height / 2);
     }
   }
 
-  void displayIndicator() {
+  private void displayIndicator() {
     stroke(this.indicatorStrokeColorRed, this.indicatorStrokeColorGreen, this.indicatorStrokeColorBlue);
     strokeWeight(this.indicatorStrokeWidth);
     fill(this.indicatorColorRed, this.indicatorColorGreen, this.indicatorColorBlue);
 
-    if (this.value) {
+    if (this.getValue()) {
       if (this.centered) {
-        circle(this.x + this.width / 2 - this.width / 4, this.y, min(this.height, this.width) - 5);
+        circle(this.getX() + this.width / 2 - this.width / 4, this.getY(), min(this.height, this.width) - 5);
       } else {
-        circle(this.x + this.width - this.width / 4, this.y + this.height / 2, min(this.height, this.width) - 5);
+        circle(this.getX() + this.width - this.width / 4, this.getY() + this.height / 2, min(this.height, this.width) - 5);
       }
     } else {
       if (this.centered) {
-        circle(this.x - this.width / 4, this.y, min(this.height, this.width) - 5);
+        circle(this.getX() - this.width / 4, this.getY(), min(this.height, this.width) - 5);
       } else {
-        circle(this.x + this.width / 4, this.y + this.height / 2, min(this.height, this.width) - 5);
+        circle(this.getX() + this.width / 4, this.getY() + this.height / 2, min(this.height, this.width) - 5);
       }
     }
   }
 
-  void displayText() {
+  private void displayText() {
     textAlign(CENTER, CENTER);
     textSize(this.textSize);
     fill(this.textColorRed, this.textColorGreen, this.textColorBlue);
 
-    if (this.value) {
+    if (this.getValue()) {
       if (this.centered) {
-        text(this.textOn, this.x - this.width / 4, this. y);
+        text(this.getTextOn(), this.getX() - this.width / 4, this.getY());
       } else {
-        text(this.textOn, this.x + this.width / 4, this. y + this.height / 2);
+        text(this.getTextOn(), this.getX() + this.width / 4, this.getY() + this.height / 2);
       }
     } else {
       if (this.centered) {
-        text(this.textOff, this.x + this.width / 4, this. y);
+        text(this.getTextOff(), this.getX() + this.width / 4, this.getY());
       } else {
-        text(this.textOff, this.x + this.width - this.width / 4, this. y + this.height / 2);
+        text(this.getTextOff(), this.getX() + this.width - this.width / 4, this.getY() + this.height / 2);
       }
     }
   }
 
-  void animation() {
+  private void animation() {
     if (this.animationCurrentFrame == this.animationDurationInFrame) {
-      this.value = !this.value;
-      this.valueChanged = true;
+      this.setValue(!this.getValue());
+      this.setValueChanged(true);
       this.animation = false;
       this.animationCurrentFrame = 0;
     } else {
@@ -230,28 +227,28 @@ class ToggleSlider extends Toggle {
       fill(this.textColorRed, this.textColorGreen, this.textColorBlue);
 
       if (this.centered) {
-        text(this.textOn, this.x - this.width / 4, this. y);
-        text(this.textOff, this.x + this.width / 4, this. y);
+        text(this.getTextOn(), this.getX() - this.width / 4, this.getY());
+        text(this.getTextOff(), this.getX() + this.width / 4, this.getY());
       } else {
-        text(this.textOn, this.x + this.width / 4, this. y + this.height / 2);
-        text(this.textOff, this.x + this.width - this.width / 4, this. y + this.height / 2);
+        text(this.getTextOn(), this.getX() + this.width / 4, this.getY() + this.height / 2);
+        text(this.getTextOff(), this.getX() + this.width - this.width / 4, this.getY() + this.height / 2);
       }
 
       stroke(this.indicatorStrokeColorRed, this.indicatorStrokeColorGreen, this.indicatorStrokeColorBlue);
       strokeWeight(this.indicatorStrokeWidth);
       fill(this.indicatorColorRed, this.indicatorColorGreen, this.indicatorColorBlue);
 
-      if (this.value) {
+      if (this.getValue()) {
         if (this.centered) {
-          circle(this.x + this.width / 2 - this.width / 4 - ((this.width / 2) * this.avancementInAnimation), this.y, min(this.height, this.width) - 5);
+          circle(this.getX() + this.width / 2 - this.width / 4 - ((this.width / 2) * this.avancementInAnimation), this.getY(), min(this.height, this.width) - 5);
         } else {
-          circle(this.x + this.width - this.width / 4 - ((this.width / 2) * this.avancementInAnimation), this.y + this.height / 2, min(this.height, this.width) - 5);
+          circle(this.getX() + this.width - this.width / 4 - ((this.width / 2) * this.avancementInAnimation), this.getY() + this.height / 2, min(this.height, this.width) - 5);
         }
       } else {
         if (this.centered) {
-          circle(this.x - this.width / 4 + ((this.width / 2) * this.avancementInAnimation), this.y, min(this.height, this.width) - 5);
+          circle(this.getX() - this.width / 4 + ((this.width / 2) * this.avancementInAnimation), this.getY(), min(this.height, this.width) - 5);
         } else {
-          circle(this.x + this.width / 4 + ((this.width / 2) * this.avancementInAnimation), this.y + this.height / 2, min(this.height, this.width) - 5);
+          circle(this.getX() + this.width / 4 + ((this.width / 2) * this.avancementInAnimation), this.getY() + this.height / 2, min(this.height, this.width) - 5);
         }
       }
 
@@ -261,20 +258,20 @@ class ToggleSlider extends Toggle {
     }
   }
 
-  void updateValue() {
+  public void updateValue() {
     if (!this.animation) {
-      if (this.isActivated() && !this.valueChanged && this.animated) {
+      if (this.isActivated() && !this.getValueChanged() && this.animated) {
         this.animation = true;
-      } else if (this.isActivated() && !this.valueChanged && !this.animated) {
-        this.value = !this.value;
-        this.valueChanged = true;
-      } else if (this.valueChanged && !this.isActivated()) {
-        this.valueChanged = false;
+      } else if (this.isActivated() && !this.getValueChanged() && !this.animated) {
+        this.setValue(!this.getValue());
+        this.setValueChanged(true);
+      } else if (this.getValueChanged() && !this.isActivated()) {
+        this.setValueChanged(false);
       }
     }
   }
 
-  void display() {
+  public void display() {
     updateValue();
     displayBar();
     if (this.animation) {
@@ -285,141 +282,153 @@ class ToggleSlider extends Toggle {
     }
   }
 
-  boolean isMouseHovering() {
+  public boolean isMouseHovering() {
     if (this.centered) {
-      if (mouseX < this.x + this.width / 2 - this.height / 2 && mouseX > this.x - this.width / 2 + this.height / 2 && mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2
-        || distanceTwoPoints(mouseX, mouseY, this.x - this.width / 2 + this.height / 2, this.y) <= this.height / 2
-        || distanceTwoPoints(mouseX, mouseY, this.x + this.width / 2 - this.height / 2, this.y) <= this.height / 2) {
+      if (mouseX < this.getX() + this.width / 2 - this.height / 2 && mouseX > this.getX() - this.width / 2 + this.height / 2 && mouseY > this.getY() - this.height / 2 && mouseY < this.getY() + this.height / 2
+        || distanceTwoPoints(mouseX, mouseY, this.getX() - this.width / 2 + this.height / 2, this.getY()) <= this.height / 2
+        || distanceTwoPoints(mouseX, mouseY, this.getX() + this.width / 2 - this.height / 2, this.getY()) <= this.height / 2) {
         return true;
       }
     } else {
-      if (mouseX < this.x + this.width - this.height / 2 && mouseX > this.x + this.height / 2 && mouseY > this.y && mouseY < this.y + this.height
-        || distanceTwoPoints(mouseX, mouseY, this.x + this.height / 2, this.y + this.height / 2) <= this.height / 2
-        || distanceTwoPoints(mouseX, mouseY, this.x + this.width - this.height / 2, this.y + this.height / 2) <= this.height / 2) {
+      if (mouseX < this.getX() + this.width - this.height / 2 && mouseX > this.getX() + this.height / 2 && mouseY > this.getY() && mouseY < this.getY() + this.height
+        || distanceTwoPoints(mouseX, mouseY, this.getX() + this.height / 2, this.getY() + this.height / 2) <= this.height / 2
+        || distanceTwoPoints(mouseX, mouseY, this.getX() + this.width - this.height / 2, this.getY() + this.height / 2) <= this.height / 2) {
         return true;
       }
     }
     return false;
   }
 
-  boolean isActivated() {
+  public boolean isActivated() {
     return mousePressed && this.isMouseHovering();
   }
 
-  int getWidth () {
+  public int getWidth () {
     return this.width;
   }
 
-  int getHeight () {
+  public int getHeight () {
     return this.height;
   }
 
-  int getBackgroundStrokeWidth () {
+  public int getBackgroundStrokeWidth () {
     return this.backgroundStrokeWidth;
   }
 
-  int getIndicatorStrokeWidth () {
+  public int getIndicatorStrokeWidth () {
     return this.indicatorStrokeWidth;
   }
 
-  float getAnimationDuration () {
+  public float getAnimationDuration () {
     return this.animationDuration;
   }
 
-  int getAnimationCurrentFrame () {
+  public int getAnimationCurrentFrame () {
     return this.animationCurrentFrame;
   }
 
-  int getAnimationDurationInFrame () {
+  public int getAnimationDurationInFrame () {
     return this.animationDurationInFrame;
   }
 
-  boolean isAnimated () {
+  public boolean isAnimated () {
     return this.animated;
   }
 
-  boolean isAnimationCurrentlyActive () {
+  public boolean isAnimationCurrentlyActive () {
     return this.animation;
   }
 
-  boolean isToggleCentered () {
+  public boolean isToggleCentered () {
     return this.centered;
   }
 
-  int getTextSize () {
+  public int getTextSize () {
     return this.textSize;
   }
+  
+  public void setTextColor (int red, int green, int blue) {
+    this.textColorRed = red;
+    this.textColorGreen = green;
+    this.textColorBlue = blue;
+  }
 
-  void setWidth (int w) {
+  public void setTextColor (int black) {
+    this.textColorRed = black;
+    this.textColorGreen = black;
+    this.textColorBlue = black;
+  }
+
+  public void setWidth (int w) {
     this.width = w;
   }
 
-  void setHeight (int h) {
+  public void setHeight (int h) {
     this.height = h;
   }
 
-  void setBackgroundColor (int red, int green, int blue) {
+  public void setBackgroundColor (int red, int green, int blue) {
     this.backgroundColorRed = red;
     this.backgroundColorGreen = green;
     this.backgroundColorBlue = blue;
   }
 
-  void setBackgroundColor (int black) {
+  public void setBackgroundColor (int black) {
     this.backgroundColorRed = black;
     this.backgroundColorGreen = black;
     this.backgroundColorBlue = black;
   }
 
-  void setBackgroundStrokeColor (int red, int green, int blue) {
+  public void setBackgroundStrokeColor (int red, int green, int blue) {
     this.backgroundStrokeColorRed = red;
     this.backgroundStrokeColorGreen = green;
     this.backgroundStrokeColorBlue = blue;
   }
 
-  void setBackgroundStrokeColor (int black) {
+  public void setBackgroundStrokeColor (int black) {
     this.backgroundStrokeColorRed = black;
     this.backgroundStrokeColorGreen = black;
     this.backgroundStrokeColorBlue = black;
   }
 
-  void setIndicatorColor (int red, int green, int blue) {
+  public void setIndicatorColor (int red, int green, int blue) {
     this.indicatorColorRed = red;
     this.indicatorColorGreen = green;
     this.indicatorColorBlue = blue;
   }
 
-  void setIndicatorColor (int black) {
+  public void setIndicatorColor (int black) {
     this.indicatorColorRed = black;
     this.indicatorColorGreen = black;
     this.indicatorColorBlue = black;
   }
 
-  void setIndicatorStrokeColor (int red, int green, int blue) {
+  public void setIndicatorStrokeColor (int red, int green, int blue) {
     this.indicatorStrokeColorRed = red;
     this.indicatorStrokeColorGreen = green;
     this.indicatorStrokeColorBlue = blue;
   }
 
-  void setIndicatorStrokeColor (int black) {
+  public void setIndicatorStrokeColor (int black) {
     this.indicatorStrokeColorRed = black;
     this.indicatorStrokeColorGreen = black;
     this.indicatorStrokeColorBlue = black;
   }
 
-  void setAnimationDuration (float duration) {
+  public void setAnimationDuration (float duration) {
     this.animationDuration = duration;
     this.animationDurationInFrame = (int)(duration * 60);
   }
 
-  void setAnimated (boolean animated) {
+  public void setAnimated (boolean animated) {
     this.animated = animated;
   }
 
-  void setCentered (boolean centered) {
+  public void setCentered (boolean centered) {
     this.centered = centered;
   }
 
-  void setTextSize (int textSize) {
+  public void setTextSize (int textSize) {
     this.textSize = textSize;
   }
 }
@@ -427,13 +436,17 @@ class ToggleSlider extends Toggle {
 
 class ToggleButton extends Toggle {
 
-  int radius;
+  private int radius;
 
-  int buttonColorRed;
-  int buttonColorGreen;
-  int buttonColorBlue;
+  private int buttonColorRed;
+  private int buttonColorGreen;
+  private int buttonColorBlue;
+  
+  private int textColorRed;
+  private int textColorGreen;
+  private int textColorBlue;
 
-  int textSize;
+  private int textSize;
 
   ToggleButton (int posX, int posY, int radius) {
     super(posX, posY);
@@ -442,50 +455,54 @@ class ToggleButton extends Toggle {
     this.buttonColorRed = 222;
     this.buttonColorGreen = 0;
     this.buttonColorBlue = 0;
+    
+    this.textColorRed = 0;
+    this.textColorGreen = 0;
+    this.textColorBlue = 0;
 
     this.textSize = 30;
   }
 
-  void displayText() {
+  private void displayText() {
     textSize(this.textSize);
     textAlign(CENTER);
     fill(this.textColorRed, this.textColorGreen, this.textColorBlue);
-    if (this.value) {
-      text(this.textOn, this.x, this.y + this.radius / 2 + 30);
+    if (this.getValue()) {
+      text(this.getTextOn(), this.getX(), this.getY() + this.radius / 2 + 30);
     } else {
-      text(this.textOff, this.x, this.y + this.radius / 2 + 30);
+      text(this.getTextOff(), this.getY(), this.getY() + this.radius / 2 + 30);
     }
   }
 
-  void displayButton() {
+  private void displayButton() {
     noStroke();
     fill(this.buttonColorRed - 75, this.buttonColorGreen - 75, this.buttonColorBlue - 75);
-    if (this.value) {
-      circle(this.x, this.y, this.radius);
-      rect(this.x - this.radius / 2, this.y, this.radius, - (this.radius / 16));
+    if (this.getValue()) {
+      circle(this.getX(), this.getY(), this.radius);
+      rect(this.getX() - this.radius / 2, this.getY(), this.radius, - (this.radius / 16));
 
       fill(this.buttonColorRed, this.buttonColorGreen, this.buttonColorBlue);
-      circle(this.x, this.y - this.radius / 16, this.radius);
+      circle(this.getX(), this.getY() - this.radius / 16, this.radius);
     } else {
-      circle(this.x, this.y, this.radius);
-      rect(this.x - this.radius / 2, this.y, this.radius, - (this.radius / 2));
+      circle(this.getX(), this.getY(), this.radius);
+      rect(this.getX() - this.radius / 2, this.getY(), this.radius, - (this.radius / 2));
 
       fill(this.buttonColorRed, this.buttonColorGreen, this.buttonColorBlue);
-      circle(this.x, this.y - this.radius / 2, this.radius);
+      circle(this.getX(), this.getY() - this.radius / 2, this.radius);
     }
   }
 
-  boolean isMouseHovering() {
-    if (this.value) {
-      if (mouseX > this.x - this.radius / 2 && mouseX < this.x + this.radius / 2 && mouseY < this.y + this.radius /16 && mouseY > this.y
-        || distanceTwoPoints(mouseX, mouseY, this.x, this.y) <= this.radius / 2
-        || distanceTwoPoints(mouseX, mouseY, this.x, this.y - this.radius / 16) <= this.radius / 2) {
+  public boolean isMouseHovering() {
+    if (this.getValue()) {
+      if (mouseX > this.getX() - this.radius / 2 && mouseX < this.getX() + this.radius / 2 && mouseY < this.getY() + this.radius /16 && mouseY > this.getY()
+        || distanceTwoPoints(mouseX, mouseY, this.getX(), this.getY()) <= this.radius / 2
+        || distanceTwoPoints(mouseX, mouseY, this.getX(), this.getY() - this.radius / 16) <= this.radius / 2) {
         return true;
       }
     } else {
-      if (mouseX > this.x - this.radius / 2 && mouseX < this.x + this.radius / 2 && mouseY < this.y + this.radius /2 && mouseY > this.y
-        || distanceTwoPoints(mouseX, mouseY, this.x, this.y) <= this.radius / 2
-        || distanceTwoPoints(mouseX, mouseY, this.x, this.y - this.radius / 2) <= this.radius / 2) {
+      if (mouseX > this.getX() - this.radius / 2 && mouseX < this.getX() + this.radius / 2 && mouseY < this.getY() + this.radius /2 && mouseY > this.getY()
+        || distanceTwoPoints(mouseX, mouseY, this.getX(), this.getY()) <= this.radius / 2
+        || distanceTwoPoints(mouseX, mouseY, this.getX(), this.getY() - this.radius / 2) <= this.radius / 2) {
         return true;
       }
     }
@@ -493,52 +510,64 @@ class ToggleButton extends Toggle {
     return false;
   }
 
-  boolean isActivated() {
+  public boolean isActivated() {
     return mousePressed && this.isMouseHovering();
   }
 
-  void updateValue() {
-    if (this.isActivated() && !this.valueChanged) {
-      this.value = !this.value;
-      this.valueChanged = true;
-    } else if (this.valueChanged && !this.isActivated()) {
-      this.valueChanged = false;
+  public void updateValue() {
+    if (this.isActivated() && !this.getValueChanged()) {
+      this.setValue(!this.getValue());
+      this.setValueChanged(true);
+    } else if (this.getValueChanged() && !this.isActivated()) {
+      this.setValueChanged(false);
     }
   }
 
-  void display() {
+  public void display() {
     updateValue();
-    if (this.displayText) {
+    if (this.isTextDisplayed()) {
       displayText();
     }
     displayButton();
   }
 
-  int getRadius () {
+  public int getRadius () {
     return this.radius;
   }
 
-  int getTextSize () {
+  public int getTextSize () {
     return this.textSize;
   }
+  
+  public void setTextColor (int red, int green, int blue) {
+    this.textColorRed = red;
+    this.textColorGreen = green;
+    this.textColorBlue = blue;
+  }
 
-  void setRadius (int r) {
+  public void setTextColor (int black) {
+    this.textColorRed = black;
+    this.textColorGreen = black;
+    this.textColorBlue = black;
+  }
+
+  public void setRadius (int r) {
     this.radius = r;
   }
 
-  void setButtonColor (int red, int green, int blue) {
+  public void setButtonColor (int red, int green, int blue) {
     this.buttonColorRed = red;
     this.buttonColorGreen = green;
     this.buttonColorBlue = blue;
   }
 
-  void setButtonColor (int black) {
+  public void setButtonColor (int black) {
     this.buttonColorRed = black;
     this.buttonColorGreen = black;
     this.buttonColorBlue = black;
   }
 
-  void setTextSize (int textSize) {
+  public void setTextSize (int textSize) {
     this.textSize = textSize;
   }
 }
