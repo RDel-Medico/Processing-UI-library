@@ -11,32 +11,30 @@ class Button {
 
   private int fontSize;
   private boolean autoFontSize;
-  private int textRed;
-  private int textGreen;
-  private int textBlue;
+  public int textRed;
+  public int textGreen;
+  public int textBlue;
   private String font;
   private boolean dirtyFont;
 
-  private int red;
-  private int green;
-  private int blue;
+  public int red;
+  public int green;
+  public int blue;
 
   private int borderWidth;
-  private int borderRed;
-  private int borderGreen;
-  private int borderBlue;
+  public int borderRed;
+  public int borderGreen;
+  public int borderBlue;
 
   private boolean roundedCorners;
   private int cornerRadius;
 
-  private float fontHeight;
-
-  private int hoverRedEffect;
-  private int hoverGreenEffect;
-  private int hoverBlueEffect;
-  private int activatedRedEffect;
-  private int activatedGreenEffect;
-  private int activatedBlueEffect;
+  public int hoverRedEffect;
+  public int hoverGreenEffect;
+  public int hoverBlueEffect;
+  public int activatedRedEffect;
+  public int activatedGreenEffect;
+  public int activatedBlueEffect;
 
   Button (int x, int y, int w, int h, String text) {
     this.x = x;
@@ -53,8 +51,6 @@ class Button {
     this.textBlue = 180;
     this.font = PFont.list()[0];
     this.dirtyFont = true;
-
-    this.fontHeight = textAscent() - textDescent();
 
     this.red = 100;
     this.green = 100;
@@ -107,11 +103,7 @@ class Button {
       }
     }
   }
-
-  private void updateFontHeight() {
-    this.fontHeight = textAscent() - textDescent();
-  }
-
+  
   private void setFontSize() {
     float minWidth = 12/this.text.length() * this.width;
 
@@ -125,7 +117,6 @@ class Button {
       this.setFontSize();
       this.dirtyFont = false;
       textFont(createFont(this.font, this.fontSize));
-      updateFontHeight();
     } else {
       textFont(createFont(this.font, this.fontSize));
     }

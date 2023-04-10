@@ -41,9 +41,9 @@ public abstract class Toggle {
   public boolean getValue () {
     return this.value;
   }
-  
+
   public boolean getValueChanged () {
-    return this.valueChanged; 
+    return this.valueChanged;
   }
 
   public boolean isTextDisplayed () {
@@ -77,11 +77,11 @@ public abstract class Toggle {
   public void setTextOff (String t) {
     this.textOff = t;
   }
-  
+
   public void setValue (boolean value) {
-    this.value = value; 
+    this.value = value;
   }
-  
+
   public void setValueChanged (boolean v) {
     this.valueChanged = v;
   }
@@ -93,25 +93,25 @@ class ToggleSlider extends Toggle {
   private int width;
   private int height;
 
-  private int backgroundColorRed;
-  private int backgroundColorGreen;
-  private int backgroundColorBlue;
-  private int backgroundStrokeColorRed;
-  private int backgroundStrokeColorGreen;
-  private int backgroundStrokeColorBlue;
+  public int backgroundColorRed;
+  public int backgroundColorGreen;
+  public int backgroundColorBlue;
+  public int backgroundStrokeColorRed;
+  public int backgroundStrokeColorGreen;
+  public int backgroundStrokeColorBlue;
   private int backgroundStrokeWidth;
 
-  private int indicatorColorRed;
-  private int indicatorColorGreen;
-  private int indicatorColorBlue;
-  private int indicatorStrokeColorRed;
-  private int indicatorStrokeColorGreen;
-  private int indicatorStrokeColorBlue;
+  public int indicatorColorRed;
+  public int indicatorColorGreen;
+  public int indicatorColorBlue;
+  public int indicatorStrokeColorRed;
+  public int indicatorStrokeColorGreen;
+  public int indicatorStrokeColorBlue;
   private int indicatorStrokeWidth;
-  
-  private int textColorRed;
-  private int textColorGreen;
-  private int textColorBlue;
+
+  public int textColorRed;
+  public int textColorGreen;
+  public int textColorBlue;
 
   private float animationDuration;
   private int animationCurrentFrame;
@@ -146,7 +146,7 @@ class ToggleSlider extends Toggle {
     this.indicatorStrokeColorGreen = 210;
     this.indicatorStrokeColorBlue = 210;
     this.indicatorStrokeWidth = 2;
-    
+
     this.textColorRed = 0;
     this.textColorGreen = 0;
     this.textColorBlue = 0;
@@ -346,7 +346,7 @@ class ToggleSlider extends Toggle {
   public int getTextSize () {
     return this.textSize;
   }
-  
+
   public void setTextColor (int red, int green, int blue) {
     this.textColorRed = red;
     this.textColorGreen = green;
@@ -438,13 +438,13 @@ class ToggleButton extends Toggle {
 
   private int radius;
 
-  private int buttonColorRed;
-  private int buttonColorGreen;
-  private int buttonColorBlue;
-  
-  private int textColorRed;
-  private int textColorGreen;
-  private int textColorBlue;
+  public int buttonColorRed;
+  public int buttonColorGreen;
+  public int buttonColorBlue;
+
+  public int textColorRed;
+  public int textColorGreen;
+  public int textColorBlue;
 
   private int textSize;
 
@@ -455,7 +455,7 @@ class ToggleButton extends Toggle {
     this.buttonColorRed = 222;
     this.buttonColorGreen = 0;
     this.buttonColorBlue = 0;
-    
+
     this.textColorRed = 0;
     this.textColorGreen = 0;
     this.textColorBlue = 0;
@@ -538,7 +538,7 @@ class ToggleButton extends Toggle {
   public int getTextSize () {
     return this.textSize;
   }
-  
+
   public void setTextColor (int red, int green, int blue) {
     this.textColorRed = red;
     this.textColorGreen = green;

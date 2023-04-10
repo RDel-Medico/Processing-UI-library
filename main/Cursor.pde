@@ -13,46 +13,46 @@ class Cursor {
 
   private boolean centered;
 
-  private int barColorRed;
-  private int barColorGreen;
-  private int barColorBlue;
+  public int barColorRed;
+  public int barColorGreen;
+  public int barColorBlue;
   private int barStrokeWidth;
-  private int barStrokeColorRed;
-  private int barStrokeColorGreen;
-  private int barStrokeColorBlue;
+  public int barStrokeColorRed;
+  public int barStrokeColorGreen;
+  public int barStrokeColorBlue;
 
-  private int selectorColorRed;
-  private int selectorColorGreen;
-  private int selectorColorBlue;
+  public int selectorColorRed;
+  public int selectorColorGreen;
+  public int selectorColorBlue;
   private int selectorStrokeWidth;
-  private int selectorStrokeColorRed;
-  private int selectorStrokeColorGreen;
-  private int selectorStrokeColorBlue;
+  public int selectorStrokeColorRed;
+  public int selectorStrokeColorGreen;
+  public int selectorStrokeColorBlue;
 
   private int selectorX;
   private int selectorY;
   private int selectorRadius;
 
   private int valueFontSize;
-  private int valueFontColorRed;
-  private int valueFontColorGreen;
-  private int valueFontColorBlue;
-  private int valueStrokeColorRed;
-  private int valueStrokeColorGreen;
-  private int valueStrokeColorBlue;
+  public int valueFontColorRed;
+  public int valueFontColorGreen;
+  public int valueFontColorBlue;
+  public int valueStrokeColorRed;
+  public int valueStrokeColorGreen;
+  public int valueStrokeColorBlue;
   private int valueStrokeWidth;
-  private int valueBackgroundColorRed;
-  private int valueBackgroundColorGreen;
-  private int valueBackgroundColorBlue;
+  public int valueBackgroundColorRed;
+  public int valueBackgroundColorGreen;
+  public int valueBackgroundColorBlue;
   private boolean fontDirty;
   private boolean showValue;
 
 
   private String title;
   private int titleFontSize;
-  private int titleColorRed;
-  private int titleColorGreen;
-  private int titleColorBlue;
+  public int titleColorRed;
+  public int titleColorGreen;
+  public int titleColorBlue;
   private boolean titleTop;
   private boolean showTitle;
 

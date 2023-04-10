@@ -1,18 +1,18 @@
 abstract class CheckButton {
-  String [] values;
-  int nbValue;
+  private String [] values;
+  private int nbValue;
 
-  int x;
-  int y;
+  private int x;
+  private int y;
 
-  int spaceBetweenLine;
+  private int spaceBetweenLine;
 
-  int valueColorRed;
-  int valueColorGreen;
-  int valueColorBlue;
-  int valueTextWidth;
-  
-  boolean [] clicked;
+  public int valueColorRed;
+  public int valueColorGreen;
+  public int valueColorBlue;
+  private int valueTextWidth;
+
+  private boolean [] clicked;
 
   CheckButton (int posX, int posY, String[] values) {
     this.x = posX;
@@ -25,7 +25,7 @@ abstract class CheckButton {
     this.valueColorGreen = 0;
     this.valueColorBlue = 0;
     this.valueTextWidth = 20;
-    
+
     this.clicked = new boolean[this.nbValue];
 
     for (int i = 0; i < this.nbValue; i++) {
@@ -33,29 +33,58 @@ abstract class CheckButton {
     }
   }
 
-  abstract void display();
+  public abstract void display();
+
+  public String [] getValues () {
+    return this.values;
+  }
+
+  public int getNbValue () {
+    return this.nbValue;
+  }
+
+  public int getX () {
+    return this.x;
+  }
+
+  public int getY () {
+    return this.y;
+  }
+
+  public int getSpaceBetweenLine () {
+    return this.spaceBetweenLine;
+  }
+
+  public int getValueTextWidth () {
+    return this.valueTextWidth;
+  }
+
+  public boolean [] getButtonClicked () {
+    return this.clicked;
+  }
 }
 
+
 class CheckBox extends CheckButton {
-  int boxWidth;
-  int boxHeight;
+  private int boxWidth;
+  private int boxHeight;
 
-  boolean[] boxSelected;
+  private boolean[] boxSelected;
 
-  int boxColorRed;
-  int boxColorGreen;
-  int boxColorBlue;
-  int boxStrokeColorRed;
-  int boxStrokeColorGreen;
-  int boxStrokeColorBlue;
-  int boxStrokeWidth;
+  public int boxColorRed;
+  public int boxColorGreen;
+  public int boxColorBlue;
+  public int boxStrokeColorRed;
+  public int boxStrokeColorGreen;
+  public int boxStrokeColorBlue;
+  private int boxStrokeWidth;
 
 
 
-  int checkColorRed;
-  int checkColorGreen;
-  int checkColorBlue;
-  int checkWidth;
+  public int checkColorRed;
+  public int checkColorGreen;
+  public int checkColorBlue;
+  private int checkWidth;
 
   CheckBox (int posX, int posY, String[] values, int boxWidth, int boxHeight) {
     super(posX, posY, values);
@@ -75,168 +104,204 @@ class CheckBox extends CheckButton {
     this.checkColorBlue = 0;
     this.checkWidth = 3;
 
-    this.boxSelected = new boolean[this.nbValue];
+    this.boxSelected = new boolean[this.getNbValue()];
 
 
 
-    for (int i = 0; i < this.nbValue; i++) {
+    for (int i = 0; i < this.getNbValue(); i++) {
       this.boxSelected[i] = false;
     }
   }
 
-  void displayCheckBox () {
+  private void displayCheckBox () {
     stroke(this.boxStrokeColorRed, this.boxStrokeColorGreen, this.boxStrokeColorBlue);
 
     strokeWeight(this.boxStrokeWidth);
-    for (int i = 0; i < this.nbValue; i++) {
+    for (int i = 0; i < this.getNbValue(); i++) {
       if (isMouseHoveringBox(i)) {
         fill(this.boxColorRed - 100, this.boxColorGreen - 100, this.boxColorBlue - 100);
       } else {
         fill(this.boxColorRed, this.boxColorGreen, this.boxColorBlue);
       }
-      rect(x, y + i * this.spaceBetweenLine, this.boxWidth, this.boxHeight);
+      rect(getX(), getY() + i * this.getSpaceBetweenLine(), this.boxWidth, this.boxHeight);
     }
   }
 
-  void displayValue () {
+  private void displayValue () {
     textAlign(LEFT, CENTER);
     fill(this.valueColorRed, this.valueColorGreen, this.valueColorBlue);
-    textSize(this.valueTextWidth);
-    for (int i = 0; i < this.nbValue; i++) {
-      text(values[i], this.x + this.boxWidth + 20, this.y + i * this.spaceBetweenLine);
+    textSize(this.getValueTextWidth());
+    for (int i = 0; i < this.getNbValue(); i++) {
+      text(getValues()[i], this.getX() + this.boxWidth + 20, this.getY() + i * this.getSpaceBetweenLine());
     }
   }
 
-  void displaySelected() {
+  private void displaySelected() {
     stroke(this.checkColorRed, this.checkColorGreen, this.checkColorBlue);
     strokeWeight(this.checkWidth);
-    for (int i = 0; i < this.nbValue; i++) {
+    for (int i = 0; i < this.getNbValue(); i++) {
       if (boxSelected[i]) {
-        line(this.x + 2, this.y + this.spaceBetweenLine * i + this.boxHeight / 2, this.x + this.boxWidth / 2, this.y + this.spaceBetweenLine * i + this.boxHeight - 2);
-        line(this.x + this.boxWidth / 2, this.y + this.spaceBetweenLine * i + this.boxHeight - 2, this.x + this.boxWidth - 2, this.y + this.spaceBetweenLine * i + 2);
+        line(this.getX() + 2, this.getY() + this.getSpaceBetweenLine() * i + this.boxHeight / 2, this.getX() + this.boxWidth / 2, this.getY() + this.getSpaceBetweenLine() * i + this.boxHeight - 2);
+        line(this.getX() + this.boxWidth / 2, this.getY() + this.getSpaceBetweenLine() * i + this.boxHeight - 2, this.getX() + this.boxWidth - 2, this.getY() + this.getSpaceBetweenLine() * i + 2);
       }
     }
   }
 
-  void updateChecked () {
-    for (int i = 0; i < this.nbValue; i++) {
-      if (this.isActivated(i) && !this.clicked[i]) {
+  public void updateChecked () {
+    for (int i = 0; i < this.getNbValue(); i++) {
+      if (this.isActivated(i) && !this.getButtonClicked()[i]) {
         this.boxSelected[i] = !this.boxSelected[i];
-        this.clicked[i] = true;
-      } else if (this.clicked[i] && !this.isActivated(i)) {
-        this.clicked[i] = false;
+        this.getButtonClicked()[i] = true;
+      } else if (this.getButtonClicked()[i] && !this.isActivated(i)) {
+        this.getButtonClicked()[i] = false;
       }
     }
   }
 
-  void display() {
+  public void display() {
     updateChecked();
     displayCheckBox();
     displaySelected();
     displayValue();
   }
 
-  boolean isMouseHoveringBox (int index) {
-    return mouseX > this.x && mouseX < this.x + this.boxWidth && mouseY > this.y + index * this.spaceBetweenLine && mouseY < this.y + index * this.spaceBetweenLine + this.boxHeight;
+  public boolean isMouseHoveringBox (int index) {
+    return mouseX > this.getX() && mouseX < this.getX() + this.boxWidth && mouseY > this.getY() + index * this.getSpaceBetweenLine() && mouseY < this.getY() + index * this.getSpaceBetweenLine() + this.boxHeight;
   }
 
-  boolean isActivated (int index) {
+  public boolean isActivated (int index) {
     return this.isMouseHoveringBox(index) && mousePressed;
+  }
+
+  public int getBoxWidth () {
+    return this.boxWidth;
+  }
+
+  public int getBoxHeight () {
+    return this.boxHeight;
+  }
+
+  public boolean [] getBoxSelected () {
+    return this.boxSelected;
+  }
+
+  public int getBoxStrokeWidth () {
+    return this.boxStrokeWidth;
+  }
+
+  public int getCheckWidth () {
+    return this.checkWidth;
   }
 }
 
-class RadioButton extends CheckButton {
-  int radius;
 
-  int radioButtonSelected;
-  
-  int buttonStrokeColorRed;
-  int buttonStrokeColorGreen;
-  int buttonStrokeColorBlue;
-  int buttonStrokeWidth;
-  
-  int buttonColorRed;
-  int buttonColorGreen;
-  int buttonColorBlue;
-  
-  int buttonSelectedColorRed;
-  int buttonSelectedColorGreen;
-  int buttonSelectedColorBlue;
+
+
+
+class RadioButton extends CheckButton {
+  private int radius;
+
+  private int radioButtonSelected;
+
+  public int buttonStrokeColorRed;
+  public int buttonStrokeColorGreen;
+  public int buttonStrokeColorBlue;
+  private int buttonStrokeWidth;
+
+  public int buttonColorRed;
+  public int buttonColorGreen;
+  public int buttonColorBlue;
+
+  public int buttonSelectedColorRed;
+  public int buttonSelectedColorGreen;
+  public int buttonSelectedColorBlue;
 
   RadioButton (int posX, int posY, String[] values, int radius) {
     super(posX, posY, values);
     this.radius = radius;
 
     this.radioButtonSelected = 0;
-    
+
     this.buttonStrokeColorRed = 150;
     this.buttonStrokeColorGreen = 150;
     this.buttonStrokeColorBlue = 150;
     this.buttonStrokeWidth = 1;
-    
+
     this.buttonColorRed = 200;
     this.buttonColorGreen = 200;
     this.buttonColorBlue = 200;
-    
+
     this.buttonSelectedColorRed = 0;
     this.buttonSelectedColorGreen = 222;
     this.buttonSelectedColorBlue = 0;
   }
 
-  void updateChecked() {
-    for (int i = 0; i < this.nbValue; i++) {
-      if (this.isActivated(i) && !this.clicked[i]) {
+  public void updateChecked() {
+    for (int i = 0; i < this.getNbValue(); i++) {
+      if (this.isActivated(i) && !this.getButtonClicked()[i]) {
         this.radioButtonSelected = i;
-        this.clicked[i] = true;
-      } else if (this.clicked[i] && !this.isActivated(i)) {
-        this.clicked[i] = false;
+        this.getButtonClicked()[i] = true;
+      } else if (this.getButtonClicked()[i] && !this.isActivated(i)) {
+        this.getButtonClicked()[i] = false;
       }
     }
   }
 
-  void displayRadioButton () {
+  private void displayRadioButton () {
     stroke(this.buttonStrokeColorRed, this.buttonStrokeColorGreen, this.buttonStrokeColorBlue);
 
     strokeWeight(this.buttonStrokeWidth);
-    for (int i = 0; i < this.nbValue; i++) {
+    for (int i = 0; i < this.getNbValue(); i++) {
       if (this.isMouseHoveringButton(i)) {
         fill(this.buttonColorRed - 100, this.buttonColorGreen - 100, this.buttonColorBlue - 100);
       } else {
         fill(this.buttonColorRed, this.buttonColorGreen, this.buttonColorBlue);
       }
-      circle(this.x + this.radius / 2, this.y + i * this.spaceBetweenLine, this.radius);
+      circle(this.getX() + this.radius / 2, this.getY() + i * this.getSpaceBetweenLine(), this.radius);
     }
   }
 
-  void displaySelected () {
-    
+  private void displaySelected () {
+
     fill(this.buttonSelectedColorRed, this.buttonSelectedColorGreen, this.buttonSelectedColorBlue);
     noStroke();
-    
-    circle(this.x + this.radius / 2 + 1, this.y + radioButtonSelected * this.spaceBetweenLine, this.radius - 4);
+
+    circle(this.getX() + this.radius / 2 + 1, this.getY() + radioButtonSelected * this.getSpaceBetweenLine(), this.radius - 4);
   }
 
-  void displayValue () {
+  private void displayValue () {
     textAlign(LEFT, CENTER);
     fill(this.valueColorRed, this.valueColorGreen, this.valueColorBlue);
-    textSize(this.valueTextWidth);
-    for (int i = 0; i < this.nbValue; i++) {
-      text(this.values[i], this.x + this.radius + 20, this.y + i * this.spaceBetweenLine - this.radius / 2);
+    textSize(this.getValueTextWidth());
+    for (int i = 0; i < this.getNbValue(); i++) {
+      text(this.getValues()[i], this.getX() + this.radius + 20, this.getY() + i * this.getSpaceBetweenLine() - this.radius / 2);
     }
   }
-  
-  boolean isMouseHoveringButton (int index) {
-    return distanceTwoPoints(mouseX, mouseY, this.x +this.radius / 2, this.y + index * this.spaceBetweenLine) < this.radius / 2;
+
+  public boolean isMouseHoveringButton (int index) {
+    return distanceTwoPoints(mouseX, mouseY, this.getX() +this.radius / 2, this.getY() + index * this.getSpaceBetweenLine()) < this.radius / 2;
   }
-  
-  boolean isActivated (int index) {
+
+  public boolean isActivated (int index) {
     return this.isMouseHoveringButton (index) &&  mousePressed;
   }
 
-  void display() {
+  public void display() {
     updateChecked();
     displayRadioButton();
     displaySelected();
     displayValue();
+  }
+
+  public int getRadius() {
+    return this.radius;
+  }
+
+  public int getRadioButtonSelected() {
+    return this.radioButtonSelected;
+  }
+
+  public int getButtonStrokeWidth () {
+    return this.buttonStrokeWidth;
   }
 }
