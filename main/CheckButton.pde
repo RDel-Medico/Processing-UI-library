@@ -62,6 +62,47 @@ abstract class CheckButton {
   public boolean [] getButtonClicked () {
     return this.clicked;
   }
+
+  public void addValue (String val) {
+    this.values = (String[])append(this.values, val);
+    this.nbValue++;
+  }
+
+  public void setX (int x) {
+    this.x = x;
+  }
+
+  public void setY (int y) {
+    this.y = y;
+  }
+
+  public void setSpaceBetweenLine (int spaceBetweenLine) {
+    this.spaceBetweenLine = spaceBetweenLine;
+  }
+
+  public void setValueColor (int red, int green, int blue) {
+    this.valueColorRed = red;
+    this.valueColorGreen = green;
+    this.valueColorBlue = blue;
+  }
+
+  public void setValueColor (int black) {
+    this.valueColorRed = black;
+    this.valueColorGreen = black;
+    this.valueColorBlue = black;
+  }
+
+  public void setValueTextWidth (int w) {
+    this.valueTextWidth = w;
+  }
+
+  public void setClicked (boolean [] clicked) {
+    if (this.nbValue == clicked.length) {
+      this.clicked = clicked;
+    } else {
+      println("The size of the tab must be the numbers of value");
+    }
+  }
 }
 
 
@@ -192,10 +233,59 @@ class CheckBox extends CheckButton {
   public int getCheckWidth () {
     return this.checkWidth;
   }
+
+  public void setBoxWidth (int w) {
+    this.boxWidth = w;
+  }
+
+  public void setBoxHeight (int h) {
+    this.boxHeight = h;
+  }
+
+  public void setBoxColor (int red, int green, int blue) {
+    this.boxColorRed = red;
+    this.boxColorGreen = green;
+    this.boxColorBlue = blue;
+  }
+
+  public void setBoxColor (int black) {
+    this.boxColorRed = black;
+    this.boxColorGreen = black;
+    this.boxColorBlue = black;
+  }
+
+  public void setBoxStrokeColorRed (int red, int green, int blue) {
+    this.boxStrokeColorRed = red;
+    this.boxStrokeColorGreen = green;
+    this.boxStrokeColorBlue = blue;
+  }
+
+  public void setBoxStrokeColorRed (int black) {
+    this.boxStrokeColorRed = black;
+    this.boxStrokeColorGreen = black;
+    this.boxStrokeColorBlue = black;
+  }
+
+  public void setBoxStrokeWidth (int w) {
+    this.boxStrokeWidth = w;
+  }
+
+  public void setCheckColor (int red, int green, int blue) {
+    this.checkColorRed = red;
+    this.checkColorGreen = green;
+    this.checkColorBlue = blue;
+  }
+
+  public void setCheckColor (int black) {
+    this.checkColorRed = black;
+    this.checkColorGreen = black;
+    this.checkColorBlue = black;
+  }
+
+  public void setCheckWidth (int w) {
+    this.checkWidth = w;
+  }
 }
-
-
-
 
 
 class RadioButton extends CheckButton {
@@ -303,5 +393,49 @@ class RadioButton extends CheckButton {
 
   public int getButtonStrokeWidth () {
     return this.buttonStrokeWidth;
+  }
+
+  public void setRadius (int radius) {
+    this.radius = radius;
+  }
+
+  public void setButtonStrokeColor (int red, int green, int blue) {
+    this.buttonStrokeColorRed = red;
+    this.buttonStrokeColorGreen = green;
+    this.buttonStrokeColorBlue = blue;
+  }
+
+  public void setButtonStrokeColor (int black) {
+    this.buttonStrokeColorRed = black;
+    this.buttonStrokeColorGreen = black;
+    this.buttonStrokeColorBlue = black;
+  }
+
+  public void setButtonStrokeWidth (int w) {
+    this.buttonStrokeWidth = w;
+  }
+
+  public void setButtonColor (int red, int green, int blue) {
+    this.buttonColorRed = red;
+    this.buttonColorGreen = green;
+    this.buttonColorBlue = blue;
+  }
+
+  public void setButtonColor (int black) {
+    this.buttonColorRed = black;
+    this.buttonColorGreen = black;
+    this.buttonColorBlue = black;
+  }
+
+  public void setButtonSelectedColor (int red, int green, int blue) {
+    this.buttonSelectedColorRed = red;
+    this.buttonSelectedColorGreen = green;
+    this.buttonSelectedColorBlue = blue;
+  }
+
+  public void setButtonSelectedColor (int black) {
+    this.buttonSelectedColorRed = black;
+    this.buttonSelectedColorGreen = black;
+    this.buttonSelectedColorBlue = black;
   }
 }
