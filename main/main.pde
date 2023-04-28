@@ -5,6 +5,7 @@ Toggle t1;
 Toggle t2;
 CheckButton cb1;
 CheckButton cb2;
+SearchBar s;
 
 void setup () {
   size(600, 600);
@@ -16,6 +17,7 @@ void setup () {
   t2 = new ToggleSlider(250, 350, 60, 30);
   cb1 = new CheckBox(150, 450, new String[] {"aa", "vb", "TTTTTTTTTT"}, 10, 10);
   cb2 = new RadioButton(350, 450, new String[] {"aa", "vb", "bb"}, 20);
+  s = new SearchBar(300, 550, 200, 30);
 }
 
 
@@ -28,4 +30,5 @@ void draw () {
   t2.display();
   cb1.display();
   cb2.display();
+  s.display();
 }
